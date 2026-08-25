@@ -53,22 +53,26 @@ footer_logos:
     image: img/logos/ut-austin.png
     url: https://www.utexas.edu/
     show_name: false          # 로고 그림 안에 이미 이름이 있다
-    height: 58                # 보이는 높이(px). 로고마다 시각적 무게를 맞춘다
+    height: 58                # 데스크톱에서 보이는 높이(px)
+    mobile_height: 36         # 모바일 2x2 에서 보이는 높이(px)
   - name: Oak Ridge National Laboratory
     image: img/logos/ornl.svg
     url: https://www.ornl.gov/
     show_name: false
     height: 40
+    mobile_height: 22
   - name: Seoul National University
     image: img/logos/snu.png
     url: https://en.snu.ac.kr/index.html
     show_name: false          # 로고 그림 안에 이미 이름이 있다
     height: 50
+    mobile_height: 33
   - name: National Institute of Forest Science
     image: img/logos/nifos.png
     url: https://eng-nifos.forest.go.kr/kfsweb/kfs/subIdx/Index.do?mn=UEFR
     show_name: false          # 로고 그림 안에 이미 이름이 있다
     height: 42
+    mobile_height: 23
 
 copyright: "© 2021 Hyunje Yang"
 credit: "Designed by Hyunje in Seoul"

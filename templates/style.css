@@ -329,14 +329,14 @@ footer .base span{display:block; line-height:1.7}
     justify-content:center; gap:20px 0; margin-top:20px; padding-top:18px;
   }
   footer .logo-bar .unit{flex:0 0 50%; min-height:0; justify-content:center}
-  footer .logo-bar img{height:calc(var(--logo-h,46px) * 0.55); max-width:150px; margin:0 auto}
+  footer .logo-bar img{height:var(--logo-mh,25px); max-width:150px; margin:0 auto}
   footer .base{margin-top:16px; padding:12px 0 18px}
 }
 
 @media (max-width:400px){
   .subnav a{flex:0 0 calc(50% - 6px)}
   .subnav.cols-3 a{flex:0 0 calc(33.333% - 9px); font-size:12.5px}
-  footer .logo-bar img{height:calc(var(--logo-h,46px) * 0.5); max-width:135px}
+  footer .logo-bar img{height:calc(var(--logo-mh,25px) * 0.9); max-width:135px}
 }
 
 @media print{ .nav,.subnav,.cv-button{display:none} body{background:#fff} }

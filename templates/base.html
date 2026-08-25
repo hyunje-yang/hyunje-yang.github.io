@@ -53,7 +53,7 @@
     <div class="logo-bar">
       {%- for lg in profile.footer_logos %}
       <div class="unit">
-        <a href="{{ lg.url }}" title="{{ lg.name }}"><img src="assets/{{ lg.image }}" alt="{{ lg.name }}" style="--logo-h:{{ lg.height | default(46) }}px"></a>
+        <a href="{{ lg.url }}" title="{{ lg.name }}"><img src="assets/{{ lg.image }}" alt="{{ lg.name }}" style="--logo-h:{{ lg.height | default(46) }}px; --logo-mh:{{ lg.mobile_height | default((lg.height | default(46)) * 0.55) }}px"></a>
         {%- if lg.show_name %}<span>{{ lg.name }}{% if lg.country %}<br>{{ lg.country }}{% endif %}</span>{% endif %}
       </div>
       {%- endfor %}
