@@ -150,19 +150,47 @@ def text_width_pt(text, size=10, bold=False, italic=False):
     return f.getlength(text) / 200 * size
 
 
+SQUEEZE_LIMIT_PT = 0.3      # 글자당 이만큼까지만 좁힌다 (10pt 기준 약 3%)
+MIN_GAP_PT = 26             # 왼쪽 글과 오른쪽 날짜 사이에 반드시 두는 간격
+
+
+def squeeze(p, per_char_pt):
+    """문단 전체의 자간을 아주 조금 좁힌다.
+    한 줄에 살짝 못 들어가는 항목의 날짜가 다음 줄로 밀리는 것을 막는다."""
+    val = -int(round(per_char_pt * 20))          # 1/20 pt 단위
+    val = max(val, -int(SQUEEZE_LIMIT_PT * 20))
+    if val >= 0:
+        return
+    for r in p.runs:
+        rPr = r._element.get_or_add_rPr()
+        sp = OxmlElement("w:spacing")
+        sp.set(qn("w:val"), str(val))
+        rPr.append(sp)
+
+
 def tail_right(p, left_text, right_text, *, indent_in=0.0, size=10,
                bold=False, italic=None):
     """오른쪽 끝 항목(지역, 기간)을 붙인다.
-    한 줄에 안 들어가면 줄을 바꾼 뒤 오른쪽 끝에 놓는다. 이때 그 문단은
-    양쪽정렬을 풀어 글자 사이가 벌어지지 않게 한다."""
+
+    - 살짝 넘치면 자간을 조금 좁혀 한 줄에 넣는다.
+    - 많이 넘치면 줄을 바꾸고, 그 문단은 양쪽정렬을 풀어
+      글자 사이가 벌어지지 않게 한다."""
     avail = 7.5 * 72 - indent_in * 72                     # 본문 폭(pt)
     need = (text_width_pt(left_text, size, bold) +
-            text_width_pt(right_text, size, bold, True) + 18)   # 18pt = 최소 간격
-    if need > avail:
-        p.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.runs[-1].add_break()
+            text_width_pt(right_text, size, bold, True) + MIN_GAP_PT)
+    over = need - avail
+    per_char = 0.0
+    if over > 0:
+        n = max(1, len(left_text) + len(right_text))
+        per_char = over / n * 1.15        # 글자 폭 계산 오차를 감안해 조금 더 좁힌다
+        if per_char > SQUEEZE_LIMIT_PT:                   # 좁혀도 안 들어간다
+            p.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+            p.runs[-1].add_break()
+            per_char = 0.0
     right_tab(p)
     run(p, right_text, italic=italic)
+    if per_char:
+        squeeze(p, per_char)
 
 
 def two_col(doc, left, right, *, size=10, bold=False, italic=False, keep_next=True, **kw):

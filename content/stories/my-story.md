@@ -1,3 +1,5 @@
 I am a Ph.D. candidate at The University of Texas at Austin specializing in coastal flood modeling and scientific machine learning. My research focuses on developing geometry-aware neural operator and physics-informed deep learning models for rapid storm surge and compound flood prediction.
 
 I received both my bachelor’s and master’s degrees from Seoul National University in South Korea. Before joining UT Austin, I worked as a researcher at the National Institute of Forest Science in South Korea, where I conducted field- and data-driven research in forest hydrology. My broader research interests include coastal hazards, hydrodynamic modeling, high-performance computing, and machine learning for environmental systems.
+
+I enjoy connecting with people from different backgrounds and working across disciplinary boundaries. Outside of research, music has been an important part of my life. I founded the rock band Muguet in 2014 and served as its vocalist and guitarist, leading the band through the release of our full-length album, *Forest Dawn*, in 2022.
