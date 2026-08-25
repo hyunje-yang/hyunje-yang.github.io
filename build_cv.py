@@ -293,19 +293,19 @@ def build_docx(profile, cv):
         p = para(doc, size=10, bold=True, space_before=2, keep_next=True)
         run(p, "[Preprints]")
         for x in cv["preprints"]:
-            p = para(doc, size=10, num=NUM_DASH)
+            p = para(doc, size=10, num=NUM_DASH, align="left")
             write_ref(p, x, kind="preprint")
 
     p = para(doc, size=10, bold=True, space_before=4, keep_next=True)
     run(p, "[Journals]")
     for x in cv["publications"]:
-        p = para(doc, size=10, num=NUM_DASH)
+        p = para(doc, size=10, num=NUM_DASH, align="left")
         write_ref(p, x, kind="journal")
 
     p = para(doc, size=10, bold=True, space_before=4, keep_next=True)
     run(p, "[Books]")
     for b in cv["books"]:
-        p = para(doc, size=10, num=NUM_DASH)
+        p = para(doc, size=10, num=NUM_DASH, align="left")
         write_authors(p, b["authors"])
         run(p, " ")
         run(p, b["title"] + ".", italic=True)
@@ -317,7 +317,7 @@ def build_docx(profile, cv):
         p = para(doc, size=10, bold=True, space_before=4, keep_next=True)
         run(p, label)
         for c in cv["conferences"][key]:
-            p = para(doc, size=10, num=NUM_DASH)
+            p = para(doc, size=10, num=NUM_DASH, align="left")
             write_authors(p, c["authors"])
             run(p, f' “{c["title"]}” {c["venue"]}, {c["location"]}, {c["date"]}.')
             if c.get("note"):
