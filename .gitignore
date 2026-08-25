@@ -9,6 +9,9 @@ site/
 # 로컬에만 두고 공개 저장소에는 올리지 않는다
 archive/
 
+# CV 워드 파일 (홈페이지는 PDF 만 링크한다. 워드 원본은 로컬에만 둔다)
+assets/pdf/*.docx
+
 # 작업용 스크린샷 (프로젝트 루트에 둔 png 는 올리지 않는다)
 /*.png
 .preview-*.png
