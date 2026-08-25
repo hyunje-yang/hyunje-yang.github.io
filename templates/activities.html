@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="subnav cols-3">
+  <a href="#story">My Story</a>
+  <a href="#muguet">Muguet</a>
+  <a href="#patents">Patents</a>
+  <a href="#volunteer">Volunteer Works</a>
+  <a href="#extracurricular">Extracurricular</a>
+</div>
+
+<section id="story">
+  <h2 class="section-title">MY STORY</h2><div class="rule"></div>
+  <div class="card">{{ stories.my_story }}</div>
+</section>
+
+<section id="muguet">
+  <h2 class="section-title">MUGUET</h2><div class="rule"></div>
+
+  <div>
+    <div>
+      <div class="entry-head">
+        <span class="name">{{ cv.music.role }}, Rock Band &ldquo;{{ cv.music.band }}&rdquo;</span>
+        <span class="period">{{ cv.music.period.replace(' - ', ' – ') }}</span>
+      </div>
+      <ul>{% for s in cv.music.summary %}<li>{{ s }}</li>{% endfor %}</ul>
+
+      <h4>Members</h4>
+      <table class="plain">
+      {%- for m in cv.music.members %}
+        <tr><td class="when">{{ m.role }}</td><td>{{ m.name }}</td></tr>
+      {%- endfor %}
+      </table>
+
+      <h4>Links</h4>
+      <ul>{% for l in cv.music.links %}<li><a href="{{ l.url }}">{{ l.label }}</a></li>{% endfor %}</ul>
+    </div>
+  </div>
+
+  <h4>Discography</h4>
+  <div class="bookgrid discography">
+  {%- for d in cv.music.discography %}
+    <div class="bk">
+      {%- if d.image %}<img src="assets/{{ d.image }}" alt="{{ d.title }}" loading="lazy">{% endif %}
+      <p><strong>[{{ d.kind }}]</strong><br>
+         &ldquo;{{ d.artist }} - {{ d.title }}&rdquo;, {{ d.year }}<br>
+         <span class="muted">{{ d.credit }}. {{ d.note }}</span>
+         {%- if d.url %}<br><a href="{{ d.url }}">{{ d.url_label }}</a>{% endif %}</p>
+    </div>
+  {%- endfor %}
+  </div>
+
+  {%- for o in cv.music.other_activities %}
+  <h4>{{ o.org }}</h4>
+  <div class="entry-head">
+    <span class="name">{{ o.role }}</span>
+    <span class="period">{{ o.period.replace(' - ', ' – ') }}</span>
+  </div>
+  <p>{{ o.note }}</p>
+  {%- endfor %}
+</section>
+
+<section id="patents">
+  <h2 class="section-title">PATENTS</h2><div class="rule"></div>
+  <div class="intro">
+    <div>
+      <p><strong>{{ cv.patents.intro }}</strong></p>
+      <p class="muted">{{ cv.patents.list|length }} registered patents</p>
+      <ol class="reflist">
+      {%- for p in cv.patents.list %}
+        <li>
+          <span class="ttl">{{ p.title }}</span>
+          <span class="period">{{ p.date }}{% if p.doi %} &middot; <a href="https://doi.org/{{ p.doi }}">DOI address</a>{% endif %}</span>
+        </li>
+      {%- endfor %}
+      </ol>
+    </div>
+    <div>
+      <img src="assets/{{ cv.patents.intro_image }}" alt="Silver Prize" style="border:1px solid var(--line); margin-bottom:12px" loading="lazy">
+      <img src="assets/{{ cv.patents.booth_image }}" alt="Seoul International Invention Fair" style="border:1px solid var(--line)" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section id="volunteer">
+  <h2 class="section-title">VOLUNTEER WORKS</h2><div class="rule"></div>
+  <div class="intro">
+    <div>
+      <table class="plain">
+      {%- for v in cv.volunteer.list %}
+        <tr><td class="when">{{ v.period.replace(' - ', ' – ') }}</td>
+            <td><span class="name">{{ v.org }}</span><br>{{ v.role }}<br>{{ v.description }}</td></tr>
+      {%- endfor %}
+      </table>
+    </div>
+    <div>
+      <img src="assets/{{ cv.volunteer.image }}" alt="Volunteer works" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section id="extracurricular">
+  <h2 class="section-title">EXTRACURRICULAR</h2><div class="rule"></div>
+  <table class="plain">
+  {%- for g in cv.extracurricular %}
+    <tr>
+      <td class="when">{{ g.group }}</td>
+      <td>
+        {%- for e in g.entries %}
+        <div class="entry-head{% if not loop.first %} spaced{% endif %}">
+          <span class="name">{{ e.text }}</span>
+          <span class="period">{{ e.period.replace(' - ', ' – ') }}</span>
+        </div>
+        {%- if e.sub %}
+        <ul class="subitems">
+          {%- for x in e.sub %}<li>{{ x }}</li>{% endfor %}
+        </ul>
+        {%- endif %}
+        {%- endfor %}
+      </td>
+    </tr>
+  {%- endfor %}
+  </table>
+</section>
+
+{% endblock %}

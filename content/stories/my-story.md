@@ -1,0 +1,3 @@
+I am a Ph.D. candidate at The University of Texas at Austin specializing in coastal flood modeling and scientific machine learning. My research focuses on developing geometry-aware neural operator and physics-informed deep learning models for rapid storm surge and compound flood prediction.
+
+I received both my bachelor’s and master’s degrees from Seoul National University in South Korea. Before joining UT Austin, I worked as a researcher at the National Institute of Forest Science in South Korea, where I conducted field- and data-driven research in forest hydrology. My broader research interests include coastal hazards, hydrodynamic modeling, high-performance computing, and machine learning for environmental systems.

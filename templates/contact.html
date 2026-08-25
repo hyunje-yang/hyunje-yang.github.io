@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section>
+  <h2 class="section-title">CONTACT INFORMATION</h2><div class="rule"></div>
+
+  <div class="intro">
+    <div class="card">
+      <h3>Office</h3>
+      <p><a href="{{ profile.affiliation.lab_url }}">{{ profile.affiliation.lab }}</a><br>
+         {{ profile.affiliation.school }}<br>
+         {{ profile.affiliation.university }}<br>
+         {{ profile.address }}</p>
+
+      <h3 style="margin-top:24px">E-mail</h3>
+      <p><a href="mailto:{{ profile.email }}">{{ profile.email }}</a><br>
+         <a href="mailto:{{ profile.email_school }}">{{ profile.email_school }}</a></p>
+
+      <a class="cv-button" href="mailto:{{ profile.email }}">Send an e-mail</a>
+    </div>
+
+    <div class="card">
+      <h3>Elsewhere</h3>
+      <table class="plain">
+        <tr><td class="when">ORCID</td><td><a href="{{ profile.links.orcid.url }}">{{ profile.links.orcid.label }}</a></td></tr>
+        <tr><td class="when">Google Scholar</td><td><a href="{{ profile.links.scholar.url }}">{{ profile.links.scholar.label }}</a></td></tr>
+        <tr><td class="when">GitHub</td><td><a href="{{ profile.links.github.url }}">{{ profile.links.github.label }}</a></td></tr>
+        <tr><td class="when">Advisor</td><td><a href="{{ profile.links.advisor.url }}">{{ profile.links.advisor.label }}</a></td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

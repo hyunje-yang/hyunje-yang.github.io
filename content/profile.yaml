@@ -1,0 +1,81 @@
+# =============================================================================
+#  profile.yaml  --  누구인지 / 어떻게 연락하는지
+#  여기를 고치면 모든 페이지의 헤더, 푸터, 연락처가 한꺼번에 바뀝니다.
+# =============================================================================
+
+name: Hyunje Yang
+# 헤더 왼쪽 위에 세 줄로 들어가는 글
+header_lines:
+  - The University of Texas at Austin
+  - PhD Candidate
+  - Member of Band Muguet
+
+affiliation:
+  lab: Compound Flood Lab.
+  lab_url: https://sites.utexas.edu/junwhanlee/
+  school: Cockrell School of Engineering
+  university: The University of Texas at Austin
+
+address: 301 E Dean Keeton St, Austin, TX 78712
+# CV 머리글에는 기존 CV 와 같은 표기를 쓴다
+cv_address: 301 E Dean Keeton St, Austin, Texas, USA
+email: hyunjeyang@utexas.edu
+email_school: hy7555@my.utexas.edu
+phone: "+1 512 228 6214"
+# CV 머리글에 적히는 홈페이지 주소. 도메인을 사면 여기만 바꾸면 됩니다.
+site_url: https://hyunjeyang.com
+
+# 홈에서 쓰는 사진
+portrait: img/people/portrait-ut.jpg
+# 헤더 왼쪽 로고 (Muguet)
+brand_logo: img/logos/muguet-white.png
+
+# "DOWNLOAD FULL CV" 버튼이 가리키는 파일
+cv_pdf: pdf/Hyunje-Yang-CV.pdf
+
+links:
+  orcid:
+    label: "0000-0001-7686-3206"
+    url: https://orcid.org/0000-0001-7686-3206
+  scholar:
+    label: Hyunje Yang
+    url: https://scholar.google.com/citations?user=HOn3z0AAAAAJ&hl=en
+  github:
+    label: hyunje-yang
+    url: https://github.com/hyunje-yang
+  advisor:
+    label: "Prof. Jun-Whan Lee"
+    url: https://sites.utexas.edu/junwhanlee/
+
+# 푸터 아래쪽 기관 로고
+footer_logos:
+  - name: The University of Texas at Austin
+    image: img/logos/ut-austin.png
+    url: https://www.utexas.edu/
+    show_name: false          # 로고 그림 안에 이미 이름이 있다
+    height: 58                # 보이는 높이(px). 로고마다 시각적 무게를 맞춘다
+  - name: Oak Ridge National Laboratory
+    image: img/logos/ornl.svg
+    url: https://www.ornl.gov/
+    show_name: false
+    height: 40
+  - name: Seoul National University
+    image: img/logos/snu.png
+    url: https://en.snu.ac.kr/index.html
+    show_name: false          # 로고 그림 안에 이미 이름이 있다
+    height: 50
+  - name: National Institute of Forest Science
+    image: img/logos/nifos.png
+    url: https://eng-nifos.forest.go.kr/kfsweb/kfs/subIdx/Index.do?mn=UEFR
+    show_name: false          # 로고 그림 안에 이미 이름이 있다
+    height: 42
+
+copyright: "© 2021 Hyunje Yang"
+credit: "Designed by Hyunje in Seoul"
+
+# 메뉴 (순서를 바꾸면 사이트 메뉴 순서가 바뀝니다)
+nav:
+  - {title: Home,       file: index.html}
+  - {title: Academics,  file: academics.html}
+  - {title: Activities, file: activities.html}
+  - {title: Contact Me, file: contact.html}

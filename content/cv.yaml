@@ -1,0 +1,700 @@
+# =============================================================================
+#  cv.yaml  --  이력 전체의 "유일한 원본"
+#
+#  * 논문/발표/수상이 생기면 해당 목록의 맨 위에 한 덩어리를 추가하세요.
+#  * 날짜(year, date)는 자동 정렬에 쓰이므로 반드시 채웁니다.
+#  * 제목 안에 콜론(:)이 있으면 반드시 큰따옴표로 감쌉니다.
+#  * 저자 이름 "Yang, H." 는 홈페이지에서 자동으로 굵게 표시됩니다.
+# =============================================================================
+
+# ----------------------------------------------------------------------------- EDUCATION
+education:
+  - school: The University of Texas at Austin
+    abbr: UT Austin
+    location: Austin, TX, USA
+    degree: Ph.D. Candidate in Civil, Architectural and Environmental Engineering
+    period: Aug. 2023 - Present
+    start: 2023-08
+    notes:
+      - UT Austin Engineering Fellowship, Cockrell School of Engineering and UT Austin Graduate School
+      - "Teaching Assistant, Probability and Statistics for Civil Engineers (Spring 2025, 2026)"
+
+  - school: Seoul National University
+    abbr: SNU
+    location: Seoul, South Korea
+    degree: M.S. in Forest Environmental Science
+    period: Mar. 2016 - Feb. 2018
+    start: 2016-03
+    notes:
+      - "Thesis: Formula for Calculating Mean Velocity in Mountain Streams using the Salt Dilution Method (Advisor: Prof. Sangjun Im)"
+      - "Teaching Assistant, Forest Geological Information (Spring 2016)"
+
+  - school: Seoul National University
+    abbr: SNU
+    location: Seoul, South Korea
+    degree: B.S. in Forest Environmental Science
+    period: Mar. 2012 - Feb. 2016
+    start: 2012-03
+    notes:
+      - National Scholarship Award for 7 semesters, Ministry of Science and ICT
+
+# ----------------------------------------------------------------------------- RESEARCH EXPERIENCE
+# 홈 화면의 연표와 CV의 RESEARCH EXPERIENCE 를 함께 만듭니다.
+research_experience:
+  - org: Oak Ridge National Laboratory
+    logo: img/logos/ornl.svg          # 홈 화면에서 이 기관 뒤에 은은하게 깔린다
+    abbr: ORNL
+    location: Oak Ridge, TN, USA
+    role: Graduate Research Intern
+    period: May 2026 - Jul. 2026
+    start: 2026-05
+    end: 2026-07
+    projects:
+      - title: Artificial Intelligence for Advancing Coastal Resilience
+        period: May 2026 - Jul. 2026
+        start: 2026-05
+        bullets:
+          - Developed a geometry-aware neural operator for cross-regional storm surge prediction across diverse coastal geometries.
+          - Investigated the impacts of hurricanes on coastal wetland ecosystems.
+          - Developed a diffusion-based storm surge reconstruction model to generate time series storm surge.
+
+  - org: The University of Texas at Austin
+    logo: img/logos/ut-austin.png          # 홈 화면에서 이 기관 뒤에 은은하게 깔린다
+    abbr: UT Austin
+    location: Austin, TX, USA
+    role: Ph.D. Student, Civil, Architectural and Environmental Engineering
+    period: Aug. 2023 - Present
+    start: 2023-08
+    end: null
+    note: UT Austin Engineering Fellowship, Cockrell School of Engineering and UT Austin Graduate School
+    note_in_cv: false          # EDUCATION 에 이미 있으므로 CV(docx)에서는 생략
+    projects:
+      - title: Physics-Informed Machine Learning for Compound Flooding Prediction
+        period: May 2025 - Present
+        start: 2025-05
+        bullets:
+          - Utilizing the SFINCS (Super-Fast INundation of CoastS) model to generate training data.
+          - Incorporating governing physics constraints, including mass and momentum conservation equations, into state-of-the-art deep learning models to improve physical consistency and predictive accuracy.
+
+      - title: Integration of Machine Learning and Static Flood Models for Coastal Inundation Simulation
+        period: Aug. 2023 - Dec. 2025
+        start: 2023-08
+        bullets:
+          - Developed a hybrid model (C1PK-Flood) integrating a machine learning-based storm surge prediction model (C1PKNet) and a static flood model (MatFlood) to rapidly generate high-resolution storm surge inundation maps.
+          - Proposed a novel method to optimize time series inputs of tropical cyclone parameters.
+
+      - title: Reconstruction of Missing Data for Hurricane-Damaged Buildings using XGBoost
+        period: Aug. 2023 - Aug. 2024
+        start: 2023-08
+        bullets:
+          - Developed an imputation model using structural, geospatial, hazard, and damage level data to reconstruct missing attributes of hurricane-damaged buildings.
+          - Assessed model performance across different regions and identified key features to support post-disaster building assessments.
+
+  - org: National Institute of Forest Science
+    logo: img/logos/nifos.png          # 홈 화면에서 이 기관 뒤에 은은하게 깔린다
+    abbr: NIFoS
+    location: Seoul, South Korea
+    role: Researcher, Forest Environment and Conservation Department
+    period: Mar. 2018 - Apr. 2023
+    start: 2018-03
+    end: 2023-04
+    note: "[Government R&D Projects]"
+    projects:
+      - title: Establishment of Big Data and Integrated Utilization System for Flash Floods in Forest Watershed
+        period: Mar. 2021 - Apr. 2023
+        start: 2021-03
+        bullets:
+          - Develop flash flood forecasting models using time series flood datasets and machine learning approaches.
+          - Find the optimal devices and algorithms for flash flood warning systems suited to forested areas.
+
+      - title: Development of Forest Water Management Technology to Reduce Stream Depletion and Nonpoint Source Pollution
+        period: Mar. 2021 - Apr. 2023
+        start: 2021-03
+        bullets:
+          - Monitor and collect data on changes in water quality after forest fire and forest thinning as the preliminary stage for analysis.
+
+      - title: Quantification and Improvement of Forest Water Yield for Sustainable Supply of Freshwater
+        period: Mar. 2018 - Apr. 2023
+        start: 2018-03
+        bullets:
+          - Calibrate interest parameters and analyze their uncertainties on physical hydrological simulation model via Bayesian approach and Generalized Likelihood Uncertainty Estimation (GLUE), using in situ measurement of the water cycle in different forest stands.
+          - Collect hydrological monitoring data for hydrograph analysis; compared various estimation methods to quantify the baseflow most rationally from streamflow in forested catchments.
+          - Estimate the soil hydraulic properties and predictive uncertainties based on a national scale spatial big dataset using machine learning models; examined the influence of environmental features on soil properties through sensitivity analysis.
+        note: Selected as a 10-year national R&D project with a $2.8M grant/year.
+
+      - title: Long-term Monitoring of Flow Characteristics in Different Forest Stands and Locations
+        period: Mar. 2018 - Apr. 2023
+        start: 2018-03
+        bullets:
+          - Collect the long-term water level and meteorological data from 52 sites and compare their hydrological characteristics.
+          - Evaluate the effect of forest thinning on the forest water cycle changes based on double mass curves and nonparametric statistics.
+
+  - org: Seoul National University
+    logo: img/logos/snu.png          # 홈 화면에서 이 기관 뒤에 은은하게 깔린다
+    abbr: SNU
+    location: Seoul, South Korea
+    role: Researcher, Department of Forest Environmental Science
+    period: Jun. 2013 - Feb. 2018
+    start: 2013-06
+    end: 2018-02
+    projects:
+      - title: Hydraulic Relation of Discharge and Velocity in Mountain Streams Using Salt Dilution Method
+        period: Mar. 2016 - Feb. 2018
+        start: 2016-03
+        bullets:
+          - Measured in situ stream mean velocity and discharge via salt dilution; developed a mean velocity prediction formula based on forested topographical information and stream discharge using a nondimensionalized equation.
+
+      - title: Monitoring of Floods in Mountainous Areas and Critical Runoffs in Urban Areas
+        period: Jun. 2013 - Feb. 2016
+        start: 2013-06
+        bullets:
+          - Joined the 5th CALS Research Fellowship Program as an undergraduate researcher.
+          - Measured in situ streambed materials and organized flash flood velocity data in urban areas.
+
+# ----------------------------------------------------------------------------- PREPRINTS
+# 아직 정식 출판 전인 원고. 저널에 실리면 이 항목을 publications 로 옮깁니다.
+preprints:
+  - authors: Yang, H., Lee, J.W., Lee, W.
+    title: "Where, When, and How Do Physics-Informed Deep Learning Models Improve Hurricane-Induced Compound Flooding Predictions?"
+    venue: ESS Open Archive
+    year: 2026
+    date: Jun. 29, 2026
+    doi: 10.22541/essoar.15005345/v1
+
+# ----------------------------------------------------------------------------- JOURNAL ARTICLES
+publications:
+  - authors: Yang, H., Lee, J.W., Santos Cruz, A.U.
+    title: "Machine Learning-Enhanced Static Flood Models for High-Resolution Peak Storm Surge Inundation Mapping in Southeast Texas, USA"
+    venue: "Journal of Hydrology: Regional Studies"
+    year: 2026
+    volume: "63"
+    pages: "103056"
+    doi: 10.1016/j.ejrh.2025.103056
+
+  - authors: Yang, H., Lee, J.W., Klepac, S., Santos Cruz, A.U., Subgranon, A., Jiao, J.
+    title: Reconstructing Missing Data of Damaged Buildings From Post-Hurricane Reconnaissance Data Using XGBoost
+    venue: Frontiers in Built Environment
+    year: 2024
+    volume: "10"
+    pages: "1444001"
+    doi: 10.3389/fbuil.2024.1444001
+
+  - authors: Yang, H., Lim, H., Moon, H., Li, Q., Nam, S., Choi, B., and Choi, H.T.
+    title: Identifying the Minimum Number of Flood Events for Reasonable Flood Peak Prediction of Ungauged Forested Catchments in South Korea
+    venue: Forests
+    year: 2023
+    volume: 14(6)
+    pages: "1131"
+    doi: 10.3390/f14061131
+
+  - authors: Nam, S., Yang, H., Lim, H., Kim, J., Li, Q., Moon, H., and Choi, H.T.
+    title: Short-Term Effects of Forest Fire on Water Quality Along a Headwater Stream in the Immediate Post-Fire Period
+    venue: Water
+    year: 2023
+    volume: 15(1)
+    pages: "131"
+    doi: 10.3390/w15010131
+
+  - authors: Yang, H., Lim, H., Moon, H., Li, Q., Nam, S., Kim, J., and Choi, H.T.
+    title: "Simple Optimal Sampling Algorithm to Strengthen Digital Soil Mapping Using the Spatial Distribution of Machine Learning Predictive Uncertainty: A Case Study for Field Capacity Prediction"
+    venue: Land
+    year: 2022
+    volume: 11(11)
+    pages: "2098"
+    doi: 10.3390/land11112098
+
+  - authors: Yang, H., Yoo, H., Lim, H., Kim, J., and Choi, H.T.
+    title: Impacts of Soil Properties, Topography, and Environmental Features on Soil Water Holding Capacities (SWHCs) and Their Interrelationship
+    venue: Land
+    year: 2021
+    volume: 10(12)
+    pages: "1290"
+    doi: 10.3390/land10121290
+
+  - authors: Lim, H., Yang, H., et al.
+    title: Development of Pedo-Transfer Functions for the Saturated Hydraulic Conductivity of Forest Soil in South Korea Considering Forest Stand and Site Characteristics
+    venue: Water
+    year: 2020
+    volume: 12(8)
+    pages: "2217"
+    doi: 10.3390/w12082217
+
+  - authors: Yang, H., Choi, H.T., and Lim, H.
+    title: Effects of Forest Thinning on the Long-Term Runoff Changes of Coniferous Forest Plantation
+    venue: Water
+    year: 2019
+    volume: 11(11)
+    pages: "2301"
+    doi: 10.3390/w11112301
+
+  - authors: Yang, H., Choi, H.T., and Lim, H.
+    title: Applicability Assessment of Estimation Methods for Baseflow Recession Constants in Small Forest Catchments
+    venue: Water
+    year: 2018
+    volume: 10(8)
+    pages: "1074"
+    doi: 10.3390/w10081074
+
+  - authors: Yang, H., Lee, S., and Im, S.
+    title: Hydraulic Relation of Discharge and Velocity in Small, Steep Mountain Streams Using Salt Dilution Method
+    venue: Journal of Korean Society of Forest Science
+    year: 2018
+    volume: 107(2)
+    pages: 158-165
+    doi: 10.14578/jkfs.2018.107.2.158
+
+  - authors: Yang, H., Im, S., Lee, Q., Eu, S., and Lee, E.
+    title: Flow Measurement of Mountain Streams using Salt Dilution Method
+    venue: Journal of the Korean Society of Forest Engineering
+    year: 2016
+    volume: 14(1)
+    pages: 1-6
+    url: https://www.earticle.net/Article/A276485
+
+# ----------------------------------------------------------------------------- BOOKS
+books:
+  - authors: Choi, H.T., Kim, J., Lim, H., and Yang, H.
+    title: Standard Manual for Developing Forest Soil Water Map
+    publisher: "National Institute of Forest Science: Seoul, South Korea"
+    year: 2021
+    isbn: "9791160195859"
+    image: img/books/book-1.jpg
+
+  - authors: Choi, H.T., Kim, J., Lim, H., Yang, H., and Yoo, H.
+    title: Long-term Monitoring of Forest Catchment Runoff Characteristics by Different Forest Sites and Stands
+    publisher: "National Institute of Forest Science: Seoul, South Korea"
+    year: 2021
+    isbn: "9791160195514"
+    image: img/books/book-2.jpg
+
+  - authors: Choi, H.T., Kim, J., Seol, A., Jang, J., Jung, S., Kim, S., Lim, H., Yang, H., and Yoo, H.
+    title: A Study on the Quantification and Improvement of Forest Water Yield for Sustainable Supply of Freshwater
+    publisher: "National Institute of Forest Science: Seoul, South Korea"
+    year: 2021
+    isbn: "9791160195507"
+    image: img/books/book-3.jpg
+
+  - authors: Choi, H.T., Kim, J., Lim, H., Yang, H., and Yoo, H.
+    title: Development and Utilization of the Forest Water Map
+    publisher: "National Institute of Forest Science: Seoul, South Korea"
+    year: 2020
+    isbn: "9791160194999"
+    image: img/books/book-4.jpg
+
+  - authors: Kim, J., Choi, H.T., Lim, H., Yang, H., and Yoo, H.
+    title: Analysis on the Current Status of River Survey Methodology for the Effective Investigation of Forest Drought
+    publisher: "National Institute of Forest Science: Seoul, South Korea"
+    year: 2020
+    isbn: "9791160194913"
+    image: img/books/book-5.jpg
+
+  - authors: Choi, H.T., Lim, H., and Yang, H.
+    title: Development Method and Application of Forest Water Map
+    publisher: "National Institute of Forest Science: Seoul, South Korea"
+    year: 2019
+    isbn: "9791160193800"
+    image: img/books/book-6.jpg
+
+# ----------------------------------------------------------------------------- CONFERENCE PRESENTATIONS
+conferences:
+  oral:
+    - authors: Yang, H., Lee, J.W., Santos Cruz, A.U., Subgranon, A., Klepac, S.P., Jiao, J.
+      title: Can Hurricane, Surge, and Damage Data Assist in Reconstructing Structural Features?
+      venue: 10th Young Coastal Scientists and Engineers Conference - Americas
+      location: Quebec, Canada
+      date: Jun. 4-6, 2024
+      year: 2024
+
+    - authors: Yang, H., Lee, J.W.
+      title: "Towards Resilient Texas: Rapid Storm Surge Prediction Using Machine Learning"
+      venue: Planet Texas 2050 Symposium
+      location: Texas, USA
+      date: Feb. 27-29, 2024
+      year: 2024
+
+    - authors: Yang, H., Choi, H.T., and Lim, H.
+      title: Estimating Flood Peaks in Ungauged Forested Catchments
+      venue: Joint Symposium on Forest Science
+      location: Seoul, Korea
+      date: Feb. 15-16, 2023
+      year: 2023
+
+    - authors: Yang, H., Lim, H., Li, Q., Nam, S., Choi, H.T., Kim, J., and Moon, H.
+      title: Developing Flash Flood Predictive Model Using LSTM Neural Networks for Mountainous Areas
+      venue: Proceeding of the International Symposium on Forest Science
+      location: Daegu, Korea
+      date: Aug. 24-26, 2022
+      year: 2022
+
+    - authors: Yang, H., Lim, H., Choi, H.T., and Lee, J.
+      title: Development of Throughfall Simulation Models and Prediction Uncertainty Estimation by Different Forest Stand Characteristics
+      venue: EGU General Assembly 2022
+      location: Vienna, Austria
+      date: May 23-27, 2022
+      year: 2022
+      note: Online
+
+    - authors: Yang, H., Lim, H., Choi, H.T., Kim, J., and Nam, S.
+      title: Comparing Machine Learning Algorithms for Developing Optimal PTF and DSM Models in South Korea
+      venue: Joint Symposium on Forest Science
+      location: Seoul, Korea
+      date: Feb. 9-10, 2022
+      year: 2022
+
+    - authors: Yang, H., Lim, H., Choi, H.T., and Kim, J.
+      title: Identifying the Characteristics of Forest Water Cycle in Different Forest Stands and Rainfall Events
+      venue: Proceedings of the International Symposium on Forest Science
+      location: Pyeongchang, Korea
+      date: Aug. 18-20, 2021
+      year: 2021
+      note: Online
+
+    - authors: Yang, H., Lim, H., Choi, H.T., and Kim, J.
+      title: Estimating the Spatial Distribution of Forest Soil Water Retention using the Machine Learning Model
+      venue: Joint Symposium on Forest Science
+      location: Seoul, Korea
+      date: Feb. 17-18, 2021
+      year: 2021
+      note: Online
+
+    - authors: Yang, H., Choi, H.T., and Lim, H.
+      title: Pedo-Transfer Functions (PTFs) Development for the Saturated Hydraulic Conductivity of Forest Soil
+      venue: Proceedings of the International Symposium on Forest Science
+      location: Seoul, Korea
+      date: Aug. 19-20, 2020
+      year: 2020
+      note: Online
+
+    - authors: Yang, H., Choi, H.T., and Lim, H.
+      title: Hydraulic Properties of Forest Soils in Different Soil Texture
+      venue: Proceeding of Summer Meeting of the Korean Society of Forest Science
+      location: Seoul, Korea
+      date: Aug. 29, 2019
+      year: 2019
+
+    - authors: Yang, H., Choi, H.T., and Lim, H.
+      title: Effects of Forest Thinning on the Water Yield Increase Based on the Long-term Rainfall and Streamflow Monitoring
+      venue: Joint Symposium of Forest Science
+      location: Jinju, Korea
+      date: Feb. 20-21, 2019
+      year: 2019
+
+    - authors: Yang, H., Choi, H.T., and Lim, H.
+      title: Selection of the Proper Baseflow Recession Constant Estimation Methods for the Reasonable Hydrograph Analysis in Small Forest Catchments
+      venue: Joint Symposium of Forest Science
+      location: Seoul, Korea
+      date: Aug. 29-30, 2018
+      year: 2018
+
+    - authors: Yang, H., Lee, S., and Im, S.
+      title: Development of Estimation Formula for the Mean Stream Velocity in Steep Mountain with Salt-dilution Method
+      venue: Joint Symposium of Forest Science
+      location: Chuncheon, Korea
+      date: Feb. 21, 2018
+      year: 2018
+
+  poster:
+    - authors: Yang, H., Lee, J.W., Lee, W.
+      title: Development of a Physics-Informed Deep Learning Model for Hurricane-Induced Compound Flooding Prediction
+      venue: HydroML 2026
+      location: Texas, USA
+      date: May 19-21, 2026
+      year: 2026
+
+    - authors: Yang, H., Lee, J.W., Lee, W.
+      title: Spatiotemporally Heterogeneous Improvements in Compound Flooding Prediction through Physics-Constrained Learning and Their Implications for Coastal Risk
+      venue: Project SHIELD Workshop
+      location: Texas, USA
+      date: May 7, 2026
+      year: 2026
+
+    - authors: Kim, M., Yang, H., Chowdhury, M.E., Lee, J.W.
+      title: "Compound Flooding and Power Grid Resilience in Puerto Rico: Evaluating Extreme Forcing Duration using Mixed Hurricane Irma and Maria Scenarios"
+      venue: 2026 Energy Research Poster Competition
+      location: Texas, USA
+      date: Apr. 6-7, 2026
+      year: 2026
+
+    - authors: Yang, H., Lee, J.W., Santos Cruz, A.U.
+      title: A Hybrid AI-Driven and Static Flood Modeling for Real-Time Peak Storm Surge Inundation Mapping
+      venue: American Geophysical Union (AGU) Fall Meeting 2025
+      location: Louisiana, USA
+      date: Dec. 15-19, 2025
+      year: 2025
+
+    - authors: Yang, H., Lee, J.W., Santos Cruz, A.U.
+      title: A Hybrid Approach Integrating Machine Learning and Static Flood Models for Efficient Real-Time Peak Storm Surge Inundation Mapping
+      venue: Artificial Intelligence and Digital Twins for Earth Systems
+      location: Texas, USA
+      date: Sep. 22-24, 2025
+      year: 2025
+
+    - authors: Yang, H., Lee, J.W.
+      title: Storm Surge Hazard Estimation for Texas Coastal Areas Using Machine Learning
+      venue: 2024 CAEE Graduate Symposium
+      location: Texas, USA
+      date: Feb. 23, 2024
+      year: 2024
+
+    - authors: Yang, H., Moon, H., Lim, H., Kim, J., and Choi, H.T.
+      title: Expected Amount of Data Accumulation to Develop Reasonable Flash Flood Predictive Models Using Machine Learning Approaches
+      venue: American Geophysical Union (AGU) Fall Meeting 2022
+      location: Illinois, USA
+      date: Dec. 12-16, 2022
+      year: 2022
+      note: Online
+
+    - authors: Yang, H., Lim, H., Choi, H.T., Kim, J., and Nam, S.
+      title: A Novel Method for Selecting Priority Soil Sample Sites using Prediction Uncertainty of Machine Learning Model Based on Geospatial Information
+      venue: Frontiers in Hydrology Meeting 2022
+      location: San Juan, Puerto Rico
+      date: Jun. 19-24, 2022
+      year: 2022
+      note: Online
+
+    - authors: Yang, H., Lim, H., Kim, J., and Choi, H.T.
+      title: Effects of Soil Topographical Properties on the Forest Soil Field Capacity using Machine Learning Approach
+      venue: AGU Fall Meeting 2021
+      location: Louisiana, USA
+      date: Dec. 13-17, 2021
+      year: 2021
+      note: Online
+
+    - authors: Yang, H. and Im, S.
+      title: Salt-dilution Velocity Prediction in Naturalized Channels
+      venue: SNU and U. of Tokyo Joint Workshop
+      location: Seoul, Korea
+      date: May 9, 2017
+      year: 2017
+
+    - authors: Yang, H. and Im, S.
+      title: Flow Measurement of Mountain Rivers using Salt-dilution Method
+      venue: The 7th International Symposium of the Asian University Forests Consortium
+      location: Hokkaido, Japan
+      date: Oct. 11-14, 2016
+      year: 2016
+
+# ----------------------------------------------------------------------------- RESEARCH GALLERY (Academics 페이지의 사진 딸린 프로젝트)
+research_gallery:
+  - title: A Study on the Quantification and Promotion of Forest Water Yield for Sustainable Supply of Freshwater
+    bullets:
+      - Calibrate interest parameters and analyze their uncertainties on physical hydrological simulation model via Bayesian approach and Generalized Likelihood Uncertainty Estimation (GLUE), using in situ measurement of the water cycle in different forest stands.
+      - Investigated forest stand characteristics and collected soil samples in various forested areas.
+      - Installed various hydrological instruments and collected in situ datasets via datalogger, water level gauge, sap flow measure, and automatic water sampler.
+    images:
+      - img/research/research-01.jpg
+      - img/research/research-02.jpg
+      - img/research/research-03.png
+      - img/research/research-04.jpg
+      - img/research/research-05.jpg
+      - img/research/research-06.jpg
+
+  - title: Estimation of Forest Soil Hydraulic Characteristics Based on the National Scale Forest Geographic Information
+    bullets:
+      - "Soil hydraulic characteristics measurement: soil water holding capacities (using pressure plate), hydraulic conductivity, organic matter, and soil texture analysis."
+      - Soil hydraulic properties prediction and its predictive uncertainty estimation on a national scale based on spatial big dataset and machine learning prediction models.
+      - Priority sample site selection to strengthen the Digital Soil Mapping (DSM) model for a 10-year national R&D research project using predictive uncertainty.
+    images:
+      - img/research/research-07.png
+      - img/research/research-08.png
+      - img/research/research-09.png
+      - img/research/research-10.png
+      - img/research/research-11.jpg
+      - img/research/research-12.jpg
+
+  - title: Long-term Monitoring of the Flow Characteristics in Different Forest Stands and Locations
+    bullets:
+      - Select the optimal sites for water level gauge dams in different forest sites, and survey the sites to install the dam.
+      - Construction management of the water level gauge dam.
+      - Collect the long-term water level and meteorological data from 52 sites and compare their hydrological characteristics.
+      - Evaluate the effect of forest thinning on the forest water cycle changes based on double mass curves and nonparametric statistics.
+    images:
+      - img/research/research-13.jpg
+      - img/research/research-14.jpg
+      - img/research/research-15.jpg
+      - img/research/research-16.jpg
+      - img/research/research-17.jpg
+      - img/research/research-18.jpg
+
+  - title: Development of Forest Water Management Technology to Reduce Nonpoint Source (NPS) Pollution
+    bullets:
+      - Monitor and collect data on changes in water quality after forest fire and forest thinning as the preliminary stage for analysis.
+    images:
+      - img/research/research-19.jpg
+      - img/research/research-20.jpg
+
+  - title: Construction of Big Data and Development of Integrated Utilization System on the Flash Flood in Forest Watershed
+    bullets:
+      - Find the optimal devices and algorithms for the flash flood warning system suited to forested areas.
+      - Measured in situ stream velocity when a flash flood has occurred.
+      - Develop flash flood prediction models.
+    images:
+      - img/research/research-21.jpg
+      - img/research/research-22.png
+      - img/research/research-23.png
+
+  - title: Hydraulic Relation of Discharge and Velocity in Mountain Streams Using the Salt-dilution Method
+    bullets:
+      - Stream velocity and discharge measurement with the salt-dilution method, and developing a model for stream velocity prediction with topographical information and discharge.
+    images:
+      - img/research/research-24.png
+
+# ----------------------------------------------------------------------------- PATENTS
+patents:
+  intro: Silver Prize, Seoul International Invention Fair 2021
+  intro_image: img/people/invention-fair-silver-prize.jpg
+  booth_image: img/people/invention-fair-booth.jpg
+  list:
+    - title: Preparation Method of Forest Water Map using the Computer Program and System
+      date: Jan. 2022
+      year: 2022
+      doi: 10.8080/1020200079658
+    - title: Optimal Land Selection Method of Forest Thinning for Water Yield using the Forest Water Map and System
+      date: Jan. 2022
+      year: 2022
+      doi: 10.8080/1020200079664
+    - title: Detection Method for the Water-Saturated Weak Area of Forest Soil for Improving Landslide Danger Map using the Forest Water Map and System
+      date: Jan. 2022
+      year: 2022
+      doi: 10.8080/1020200079660
+    - title: Identification Method of the Forest with Superior Functions for Water Recharge and Its System
+      date: Jan. 2022
+      year: 2022
+      doi: 10.8080/1020200079659
+    - title: Evaluation Method of Water Yield Function using the Forest Water Map and System
+      date: Jan. 2022
+      year: 2022
+      doi: 10.8080/1020200079663
+
+# ----------------------------------------------------------------------------- AWARDS
+awards:
+  - name: Kolodzey Travel Awards, American Geophysical Union Fall Meeting 2025
+    date: Dec. 2025
+    year: 2025
+  - name: Goyette Travel Awards, 10th Young Coastal Scientists and Engineers Conference - Americas
+    date: Jun. 2024
+    year: 2024
+  - name: Third Prize in Poster Presentation, 2024 CAEE Graduate Symposium
+    date: Feb. 2024
+    year: 2024
+  - name: Best Oral Presentation, Joint Symposium of Forest Science 2023
+    date: Feb. 2023
+    year: 2023
+  - name: Silver Prize, Seoul International Invention Fair 2021 (SIIF), Korea Invention Promotion Association
+    date: Dec. 2021
+    year: 2021
+  - name: Excellence Prize, Commendation of the 23rd Regiment Commander, Republic of Korea Army Training Center
+    date: May 2020
+    year: 2020
+  - name: Merit-based Scholarship, Seoul National University
+    date: Sep. 2016
+    year: 2016
+  - name: Best Poster Award, JSPS Core-to-Core Program, Asian University Forests Consortium 7th International Symposium
+    date: Oct. 2016
+    year: 2016
+  - name: Lecture and Research Scholarship, Seoul National University
+    date: Mar. 2016
+    year: 2016
+
+# ----------------------------------------------------------------------------- SERVICE
+peer_review:
+  - Journal of Hydrology
+  - Geomatics, Natural Hazards and Risk
+
+# ----------------------------------------------------------------------------- TECHNICAL SKILLS
+skills:
+  - group: Programming
+    detail: Python, SFINCS, ADCIRC, SWAN, MATLAB, ArcGIS, QGIS
+  - group: Modeling
+    detail: Geometry-aware neural operators, physics-constrained deep learning, diffusion models, hydrological simulation modeling
+  - group: High-Performance Computing
+    detail: GPU-accelerated model training and inference on HPC systems; multi-GPU and distributed training workflows
+  - group: Experimental and Field
+    detail: Installation of hydrological instruments and data collection via datalogger, water level gauge, sap flow sensor, and automatic water sampler; salt-dilution stream discharge measurement; forest soil sampling and hydraulic property analysis
+
+# ----------------------------------------------------------------------------- MUSIC (Band Muguet)
+music:
+  band: Muguet
+  role: Founder and Leader
+  period: May 2014 - Present
+  start: 2014-05
+  summary:
+    - Founded and led a rock band; performed as a songwriter, vocalist, pianist, and guitarist.
+    - Performed in numerous band concerts; placed top 3 in the 2015 SNU Student Band Competition and received a grant for music recording.
+  members:
+    - {role: Vocal,   name: Hyunje Yang}
+    - {role: Guitars, name: "Youngmin Yoon, Hyunje Yang"}
+    - {role: Bass,    name: Jihwan Park}
+    - {role: Drums,   name: Wooyoung Min}
+    - {role: Haegeum, name: Hyejin Son}
+  links:
+    - {label: Official YouTube Channel, url: "https://www.youtube.com/channel/UCCzGQL4V6IbUW6j2q3xn5Lg"}
+    - {label: Artist homepage (Apple Music), url: "https://music.apple.com/us/artist/muguet/1645823997"}
+    - {label: Spotify artist homepage, url: "https://open.spotify.com/artist/5Bvw0pHugFm1jdnJnVz6xu"}
+  discography:
+    - kind: Original Album
+      title: Forest Dawn
+      artist: Muguet
+      year: 2022
+      credit: Play as Vocal, Guitar, and Songwriter
+      note: Available on major streaming services (Spotify, YouTube Music, Apple Music).
+      image: img/music/album-forest-dawn-front.jpg
+      url: "https://www.youtube.com/watch?v=bBqgkAALxGE&list=PLeeWE6nvA02XjpPDsGujBrgTHTjKXaVS8"
+      url_label: YouTube Playlist [Official Audio]
+
+    - kind: Digital Single
+      title: Butterfly
+      artist: Muguet
+      year: 2015
+      credit: Play as Vocal, Guitar, and Songwriter
+      note: Seoul National University compilation album, produced with SNU funding.
+      image: img/music/muguet-live.jpg
+      url: "https://www.youtube.com/watch?v=eRQC9zmlnXQ"
+      url_label: Official Audio in YouTube
+
+  other_activities:
+    - role: Singer, Guitarist, and Pianist
+      org: SNU Central Band Club Meari and College Band Club Megimsori
+      period: Mar. 2013 - Jun. 2015
+      note: Performed several times during the university festival every semester.
+
+# ----------------------------------------------------------------------------- VOLUNTEER
+volunteer:
+  image: img/people/volunteer-works.jpg
+  list:
+    - org: Habitat for Humanity
+      role: Volunteer
+      period: Feb. 2013 - Feb. 2015
+      description: Served 100+ hours and built 5+ houses.
+    - org: WITHYOU Education Volunteer Club
+      role: President and Founder
+      period: Mar. 2009 - Mar. 2013
+      description: Served 300+ hours and tutored math for low-income students.
+
+# ----------------------------------------------------------------------------- EXTRACURRICULAR
+extracurricular:
+  - group: Membership
+    entries:
+      - text: International Forestry Students' Association
+        period: Feb. 2014 - Feb. 2016
+        sub:
+          - 'Poster presentation: "Urban and School Forest in Korea," 2015 Asia Pacific Regional Meeting in Taiwan.'
+          - Discussed forest science issues and held academic seminars with other student members.
+
+  - group: Leadership
+    entries:
+      - text: President, CAEE at UT Austin Korean Student Organization
+        period: Jan. 2026 - Present
+      - text: President, UT Austin Korean Student Association
+        period: Sep. 2023 - Aug. 2024
+      - text: "Volunteer, Habitat for Humanity: Served 100+ hours and built 5+ houses"
+        period: Feb. 2013 - Feb. 2015
+      - text: "President and Founder, 'WITHYOU' Education Volunteer Club: Tutored math to low-income students"
+        period: Mar. 2009 - Mar. 2013
+
+  - group: Military Service
+    entries:
+      - text: Technical Research Personnel, National Institute of Forest Science
+        period: Apr. 2019 - Apr. 2022
+      - text: 5th Company Commander Trainee, Korea Army Training Center
+        period: May 2020

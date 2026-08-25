@@ -1,0 +1,26 @@
+# 사람이 읽는 문서. 홈페이지 빌드에 쓰이지 않으므로 공개 저장소에 올리지 않는다.
+README.md
+CLAUDE.md
+
+# 자동 생성물 (GitHub Actions 가 매번 새로 만든다)
+site/
+
+# 개인 백업 폴더 전체 (옛 CV docx, Wix 원본 HTML, 원본 해상도 사진 = 53 MB)
+# 로컬에만 두고 공개 저장소에는 올리지 않는다
+archive/
+
+# 작업용 스크린샷 (프로젝트 루트에 둔 png 는 올리지 않는다)
+/*.png
+.preview-*.png
+
+# 파이썬
+__pycache__/
+*.pyc
+.venv/
+
+# 윈도우/맥
+desktop.ini
+Thumbs.db
+.DS_Store
+~$*
+비교_*.png

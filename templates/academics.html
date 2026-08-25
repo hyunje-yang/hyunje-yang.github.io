@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="subnav cols-2">
+  <a href="#publications">Publications</a>
+  <a href="#conferences">Conferences</a>
+  <a href="#gallery">Research Experience</a>
+  <a href="#books">Books</a>
+</div>
+
+<section id="publications">
+  <h2 class="section-title">PUBLICATIONS</h2><div class="rule"></div>
+
+  {%- if cv.preprints %}
+  <h4>Preprints</h4>
+  <ol class="reflist">
+  {%- for p in cv.preprints %}
+    <li>
+      {{ p.authors | bold_me }}
+      <span class="ttl">&ldquo;{{ p.title }}&rdquo;</span>
+      {{ p.venue }}, <strong>{{ p.year }}</strong>.{% if p.status %} {{ p.status }}.{% endif %}
+      {%- if p.doi %}<br><span class="doi"><a href="https://doi.org/{{ p.doi }}">https://doi.org/{{ p.doi }}</a></span>{% endif %}
+    </li>
+  {%- endfor %}
+  </ol>
+  <h4>Journal Articles</h4>
+  {%- endif %}
+
+  <ol class="reflist">
+  {%- for p in cv.publications %}
+    <li>
+      {{ p.authors | bold_me }}
+      <span class="ttl">&ldquo;{{ p.title }}&rdquo;</span>
+      {{ p.venue }}, <strong>{{ p.year }}</strong>{% if p.volume %}, {{ p.volume }}{% endif %}{% if p.pages %}: p. {{ p.pages }}{% endif %}.
+      {%- if p.doi %}<br><span class="doi"><a href="https://doi.org/{{ p.doi }}">https://doi.org/{{ p.doi }}</a></span>
+      {%- elif p.url %}<br><span class="doi"><a href="{{ p.url }}">{{ p.url }}</a></span>{% endif %}
+    </li>
+  {%- endfor %}
+  </ol>
+
+</section>
+
+<section id="conferences">
+  <h2 class="section-title">CONFERENCES PRESENTATIONS</h2><div class="rule"></div>
+
+  <h4>Oral Presentations</h4>
+  <ol class="reflist">
+  {%- for c in cv.conferences.oral %}
+    <li>
+      {{ c.authors | bold_me }}
+      <span class="ttl">&ldquo;{{ c.title }}&rdquo;</span>
+      {{ c.venue }}, {{ c.location }}, {{ c.date | bold_year }}.{% if c.note %} <span class="muted">{{ c.note }}.</span>{% endif %}
+    </li>
+  {%- endfor %}
+  </ol>
+
+  <h4>Poster Presentations</h4>
+  <ol class="reflist">
+  {%- for c in cv.conferences.poster %}
+    <li>
+      {{ c.authors | bold_me }}
+      <span class="ttl">&ldquo;{{ c.title }}&rdquo;</span>
+      {{ c.venue }}, {{ c.location }}, {{ c.date | bold_year }}.{% if c.note %} <span class="muted">{{ c.note }}.</span>{% endif %}
+    </li>
+  {%- endfor %}
+  </ol>
+</section>
+
+<section id="gallery">
+  <h2 class="section-title">RESEARCH EXPERIENCE</h2><div class="rule"></div>
+  {%- for g in cv.research_gallery %}
+  <div class="proj-block">
+    <h3>{{ g.title }}</h3>
+    <ul>{% for b in g.bullets %}<li>{{ b }}</li>{% endfor %}</ul>
+    {%- if g.images %}
+    <div class="gallery">
+      {%- for im in g.images %}<a href="assets/{{ im }}"><img src="assets/{{ im }}" alt="" loading="lazy"></a>{% endfor %}
+    </div>
+    {%- endif %}
+  </div>
+  {%- endfor %}
+</section>
+
+<section id="books">
+  <h2 class="section-title">BOOKS</h2><div class="rule"></div>
+  <div class="bookgrid">
+  {%- for b in cv.books %}
+    <div class="bk">
+      {%- if b.image %}<img src="assets/{{ b.image }}" alt="{{ b.title }}" loading="lazy">{% endif %}
+      <p>{{ b.authors | bold_me }} <em>{{ b.title }}.</em> {{ b.publisher }}, <strong>{{ b.year }}</strong>.<br>
+      <span class="muted">ISBN: {{ b.isbn }}</span></p>
+    </div>
+  {%- endfor %}
+  </div>
+</section>
+
+<section id="awards">
+  <h2 class="section-title">AWARDS AND HONORS</h2><div class="rule"></div>
+  <table class="plain">
+  {%- for a in cv.awards %}
+    <tr><td class="when">{{ a.date }}</td><td>{{ a.name }}</td></tr>
+  {%- endfor %}
+  </table>
+</section>
+
+<section id="service">
+  <h2 class="section-title">PEER-REVIEW SERVICE</h2><div class="rule"></div>
+  <ul>{% for j in cv.peer_review %}<li>{{ j }}</li>{% endfor %}</ul>
+</section>
+
+<section id="skills">
+  <h2 class="section-title">TECHNICAL SKILLS</h2><div class="rule"></div>
+  <table class="plain">
+  {%- for s in cv.skills %}
+    <tr><td class="when">{{ s.group }}</td><td>{{ s.detail }}</td></tr>
+  {%- endfor %}
+  </table>
+</section>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page_title }} | {{ profile.name }}</title>
+<meta name="description" content="{{ profile.name }} - {{ profile.header_lines[1] }}, {{ profile.affiliation.university }}.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="brand"><img src="assets/{{ profile.brand_logo }}" alt="Muguet"></div>
+    <h1><a href="index.html">{{ profile.name }}</a></h1>
+    <div class="lines">
+      {%- for line in profile.header_lines %}{{ line }}{% if not loop.last %}<br>{% endif %}{% endfor %}
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="inner">
+    {%- for item in profile.nav %}
+    <a href="{{ item.file }}"{% if item.file == this_page %} class="active"{% endif %}>{{ item.title }}</a>
+    {%- endfor %}
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+{% block content %}{% endblock %}
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact-block">
+      <div>
+        <p>{% if profile.affiliation.lab_url %}<a href="{{ profile.affiliation.lab_url }}">{{ profile.affiliation.lab }}</a>{% else %}{{ profile.affiliation.lab }}{% endif %}</p>
+        <p>{{ profile.affiliation.school }}</p>
+        <p>{{ profile.affiliation.university }}</p>
+        <p>{{ profile.address }}</p>
+      </div>
+      <div>
+        <p><span class="label">E-mail</span><a href="mailto:{{ profile.email }}">{{ profile.email }}</a></p>
+        <p><span class="label">ORCID iD</span><a href="{{ profile.links.orcid.url }}">{{ profile.links.orcid.label }}</a></p>
+        <p><span class="label">Google Scholar</span><a href="{{ profile.links.scholar.url }}">{{ profile.links.scholar.label }}</a></p>
+        <p><span class="label">GitHub</span><a href="{{ profile.links.github.url }}">{{ profile.links.github.label }}</a></p>
+      </div>
+    </div>
+
+    <div class="logo-bar">
+      {%- for lg in profile.footer_logos %}
+      <div class="unit">
+        <a href="{{ lg.url }}" title="{{ lg.name }}"><img src="assets/{{ lg.image }}" alt="{{ lg.name }}" style="--logo-h:{{ lg.height | default(46) }}px"></a>
+        {%- if lg.show_name %}<span>{{ lg.name }}{% if lg.country %}<br>{{ lg.country }}{% endif %}</span>{% endif %}
+      </div>
+      {%- endfor %}
+    </div>
+
+    <div class="base">
+      <span>{{ profile.copyright }}</span>
+      <span>{{ profile.credit }}</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

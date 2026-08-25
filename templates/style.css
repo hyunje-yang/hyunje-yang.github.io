@@ -1,0 +1,342 @@
+/* ==========================================================================
+   Hyunje Yang - personal site
+   기존 Wix 사이트의 실제 값을 그대로 옮긴 스타일이다.
+     본문       normal 18px/1.4em Times New Roman   (Wix --font_7)
+     이름       italic 45px/1.4em Times New Roman   (Wix --font_0)
+     헤더 3줄   14px Helvetica, letter-spacing .1em (Wix --font_8)
+     섹션 제목  38px Times New Roman
+     남보라     #27223e  (Wix color_45/46)
+     짙은 남보라 #171424 (Wix color_25)
+     강조 주황  #bf5700  (UT Austin burnt orange)
+   ========================================================================== */
+:root{
+  --ink:#27223e;
+  --ink-deep:#171424;
+  --orange:#bf5700;
+  --text:#000000;
+  --muted:#6b6b6b;
+  --line:#c9c9c9;
+  --page:#e3e3e3;            /* 본문 바탕 (텍스처가 위에 깔린다) */
+  --serif:'Times New Roman', Times, 'Nanum Myeongjo', serif;
+  --sans:'Helvetica Neue', Helvetica, Arial, 'Malgun Gothic', sans-serif;
+  --wrap:980px;
+}
+
+*{box-sizing:border-box}
+html{
+  scroll-behavior:smooth; scroll-padding-top:70px;
+  overflow-y:scroll;              /* 짧은 페이지에도 스크롤바 자리를 남겨 폭을 고정 */
+  scrollbar-gutter:stable;
+}
+body{
+  margin:0; color:var(--text);
+  background-color:var(--page);
+  background-image:url("img/backgrounds/paper-texture.png");
+  background-repeat:repeat;
+  font-family:var(--serif); font-size:18px; line-height:1.4em;
+  text-wrap:pretty;
+}
+img{max-width:100%; display:block}
+a{color:var(--ink)}
+a:hover{color:var(--orange)}
+.wrap{max-width:var(--wrap); margin:0 auto; padding:0 24px}
+
+/* ---------- 헤더 : 육각형 배경 + 가운데 정렬 ---------- */
+.masthead{
+  background:var(--ink-deep) url("img/backgrounds/header.jpg") center center / cover no-repeat;
+  text-align:center; padding:30px 0 26px;
+}
+.masthead .brand{width:66px; margin:0 auto 6px}
+.masthead .brand img{width:66px; height:66px; object-fit:contain}
+.masthead h1{
+  margin:0; font-style:italic; font-weight:400; font-size:45px; line-height:1.4em;
+  color:#fff; letter-spacing:.01em;
+}
+.masthead h1 a{color:#fff; text-decoration:none}
+.masthead .lines{
+  margin-top:24px; font-family:var(--sans); font-size:14px; line-height:1.55;
+  letter-spacing:.1em; color:#fff;
+}
+
+/* ---------- 메뉴 : 남보라 띠, 가운데, 세로 구분선 ---------- */
+.nav{background:var(--ink); position:sticky; top:0; z-index:60}
+.nav .inner{max-width:var(--wrap); margin:0 auto; display:flex; padding:9px 24px}
+.nav a{
+  flex:1 1 0; text-align:center;
+  font-family:var(--serif); font-size:18px; font-weight:700; color:#fff;
+  padding:11px 8px; text-decoration:none;
+  border-right:1px solid rgba(255,255,255,.30);
+  white-space:nowrap;
+}
+.nav a:last-child{border-right:0}
+.nav a:hover{color:#fff; background:rgba(255,255,255,.12)}
+.nav a.active{background:#a9a9a9; color:var(--ink-deep)}
+
+/* ---------- 본문 ---------- */
+main{padding:34px 0 60px}
+section{margin-bottom:52px}
+h2.section-title{
+  text-wrap:balance;
+  font-family:var(--serif); font-weight:400; font-size:38px; line-height:1.4em;
+  color:var(--ink-deep); margin:0 0 4px; letter-spacing:.01em;
+}
+h2.section-title + .rule{height:1px; background:#9a9a9a; width:100%; margin:6px 0 24px}
+h3{font-family:var(--serif); font-size:23px; font-style:italic; font-weight:700;
+   color:var(--ink); margin:0 0 6px}
+h4{font-family:var(--serif); font-size:23px; font-weight:700; font-style:italic;
+   color:var(--ink-deep); margin:34px 0 12px}
+h4::after{content:""; display:block; width:120px; height:1px; background:#9a9a9a; margin-top:6px}
+
+/* ---------- 홈 : 가운데 정렬 소개 + 사진 ---------- */
+.intro{display:flex; justify-content:center; align-items:flex-start; gap:26px; margin-bottom:46px}
+.intro .who-card{text-align:center; padding-top:8px; max-width:420px}
+.intro .who-card h2{font-size:23px; font-weight:700; color:var(--text); margin:0 0 12px}
+.intro .who-card p{margin:0}
+.intro .who-card .highlight{color:var(--orange); font-weight:700}
+.intro .who-card .muted{color:var(--text)}
+.intro .photo{width:368px; flex:0 0 auto}
+/* Academics/Activities 처럼 좌우 두 덩어리를 놓는 곳은 반반으로 나눈다 */
+.intro > div:not(.who-card):not(.photo){flex:1 1 0; min-width:0}
+.intro .photo img{width:100%; height:284px; object-fit:cover}
+.cv-button{
+  display:inline-block; margin-top:20px; font-family:var(--sans); font-size:13px;
+  letter-spacing:.08em; padding:12px 30px; background:var(--ink-deep); color:#fff;
+  text-decoration:none; border:1px solid var(--ink-deep);
+}
+.cv-button:hover{background:#fff; color:var(--ink-deep)}
+
+/* ---------- 타임라인 ----------
+   선은 컨테이너에 하나만 그리고(끊기지 않게), 점을 그 선의 중심에 얹는다. */
+.timeline{position:relative; margin:0; padding:0; border:0}
+.timeline::before{
+  content:""; position:absolute; left:227px; top:7px; bottom:7px;
+  width:1px; background:#adadad;
+}
+.tl-org{position:relative; margin:0 0 38px; padding-left:250px}
+.tl-org .org-mark{                     /* 기관 로고를 아주 흐리게 뒤에 깐다 */
+  position:absolute; right:6px; top:2px;
+  width:240px; height:120px;
+  background-repeat:no-repeat; background-position:right top; background-size:contain;
+  opacity:.085; pointer-events:none; z-index:0;
+}
+.tl-org > .head, .tl-org .tl-proj{position:relative; z-index:1}
+.tl-org:last-child{margin-bottom:0}
+.tl-org::before{                       /* 기관 마커: 선 위에 정확히 중앙 */
+  content:""; position:absolute; left:227px; top:8px;
+  width:11px; height:11px; margin-left:-5px;
+  border-radius:50%; background:#8e8e8e;
+  box-shadow:0 0 0 3px var(--page);    /* 바탕색 테두리로 선을 깔끔히 끊어 보이게 */
+}
+.tl-org > .head{padding:0}
+.tl-date{
+  position:absolute; left:0; width:206px; text-align:right; top:0;
+  font-family:var(--serif); font-size:17px; font-weight:700; color:var(--ink-deep);
+  line-height:1.35; white-space:nowrap;      /* 날짜는 절대 줄바꿈하지 않는다 */
+}
+.tl-org .org{font-size:19px; font-weight:700; color:var(--ink-deep); text-wrap:balance}
+.tl-org .role{font-style:italic; font-size:16px; color:var(--text)}
+.tl-org .note{font-style:italic; font-size:15px; color:var(--text)}
+
+.tl-proj{position:relative; margin:16px 0 0; padding-left:16px; border:0}
+.tl-proj .ptitle{
+  font-weight:700; font-size:16px; color:var(--ink-deep);
+  padding-left:14px; text-indent:-14px;      /* 두 줄째부터 글자 시작선에 맞춤 */
+  text-wrap:pretty;
+}
+.tl-proj .ptitle::before{content:"\25CF\00A0"; font-size:10px; color:#6f6f6f}
+.tl-proj .tl-date{
+  position:absolute; left:-250px; width:206px; text-align:right; top:2px;
+  font-weight:400; font-style:italic; font-size:15px; color:var(--text);
+  white-space:nowrap;
+}
+.tl-proj ul{list-style:none; margin:5px 0 0; padding-left:14px}
+.tl-proj li{position:relative; padding-left:14px; font-size:16px; margin:2px 0; text-wrap:pretty}
+.tl-proj li::before{content:"\2013"; position:absolute; left:0}
+.tl-proj .pnote{font-size:15px; margin-top:4px; padding-left:14px; text-wrap:pretty}
+
+/* ---------- 참고문헌 목록 ---------- */
+ol.reflist{list-style:none; margin:0; padding:0}
+ol.reflist > li{position:relative; padding:0 0 14px 22px; font-size:16px; line-height:1.45}
+ol.reflist > li::before{content:"\2022"; position:absolute; left:4px; top:-1px; color:var(--ink-deep)}
+.reflist strong{font-weight:700}
+.reflist .ttl{font-style:normal}
+.reflist .doi{font-size:15px; word-break:break-all}
+.reflist .doi a{color:var(--ink); text-decoration:underline}
+ol.reflist > li .period{display:block; margin-top:2px; font-style:italic; font-size:14px;
+  color:#4a4a4a; white-space:nowrap}
+.reflist .year{font-weight:700}
+
+/* ---------- 갤러리 / 책 ---------- */
+.gallery{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:10px; margin-top:14px}
+.gallery img{width:100%; height:140px; object-fit:cover; border:1px solid #b5b5b5}
+.proj-block{margin-bottom:34px}
+.proj-block ul{list-style:none; margin:8px 0 0; padding-left:14px}
+.proj-block li{position:relative; padding-left:14px; font-size:16px; margin:3px 0}
+.proj-block li::before{content:"\2013"; position:absolute; left:0}
+.bookgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:22px}
+.bookgrid .bk img{width:100%; height:200px; object-fit:contain; background:#fff;
+  border:1px solid #b5b5b5; padding:6px}
+.bookgrid .bk p{font-size:14px; line-height:1.45; margin:8px 0 0}
+.bookgrid.discography{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.bookgrid.discography .bk img{height:230px; object-fit:cover; padding:0}
+
+/* Academics 안의 음반 항목 (Wix 원본에 있던 클립 표시) */
+.media-entry{display:flex; gap:20px; align-items:flex-start; margin:22px 0 0; padding-left:22px; position:relative}
+.media-entry::before{content:"\1F517"; position:absolute; left:0; top:2px; font-size:13px; filter:grayscale(1)}
+.media-entry .txt{flex:1 1 auto; font-size:16px; line-height:1.45}
+.media-entry .pics{display:flex; gap:8px; flex:0 0 auto}
+.media-entry .pics img{width:150px; height:118px; object-fit:cover; border:1px solid #b5b5b5}
+
+/* ---------- 항목 머리(제목 줄 + 기간 줄) ----------
+   제목과 기간을 한 줄에 붙이지 않는다. 기간은 항상 아래 줄, 절대 줄바꿈 없음. */
+.entry-head{margin:0 0 10px}
+.entry-head .name{font-weight:700; font-size:17px; color:var(--ink-deep); text-wrap:balance}
+.entry-head .period{display:block; margin-top:2px; font-style:italic; font-size:15px;
+  color:#4a4a4a; white-space:nowrap}
+
+.hang{padding-left:15px; text-indent:-15px; margin:3px 0; text-wrap:pretty}   /* 둘째 줄부터 글자 시작선에 맞춤 */
+.entry-head.spaced{margin-top:14px}
+.entry-head .name{font-weight:700; font-size:16px}
+ul.subitems{list-style:none; margin:4px 0 0; padding-left:14px}
+ul.subitems li{position:relative; padding-left:14px; font-size:15px; margin:2px 0; text-wrap:pretty}
+ul.subitems li::before{content:"\2013"; position:absolute; left:0; color:#6f6f6f}
+table.plain .name{font-weight:700; color:var(--ink-deep)}
+
+/* ---------- 표 ---------- */
+table.plain{width:100%; border-collapse:collapse}
+table.plain td{padding:8px 0; border-bottom:1px solid #bdbdbd; vertical-align:top; font-size:16px}
+table.plain tr:last-child td{border-bottom:0}
+table.plain td.when{width:180px; font-weight:700; color:var(--ink-deep); white-space:nowrap;
+  padding-right:16px}
+
+/* ---------- 페이지 안 앵커 메뉴 (Wix 원본: 위아래 가로선 사이) ---------- */
+.subnav{
+  display:flex; justify-content:space-around; align-items:center; gap:10px; flex-wrap:wrap;
+  border-top:1px solid #9a9a9a; border-bottom:1px solid #9a9a9a;
+  padding:12px 0; margin:0 0 34px;
+}
+.subnav a{
+  font-family:var(--serif); font-size:17px; font-weight:700; color:var(--ink-deep);
+  text-decoration:none; letter-spacing:.02em; text-align:center;
+}
+.subnav a:hover{color:var(--orange)}
+
+/* ---------- 푸터 : 흰 바탕, 로고 한 줄 ---------- */
+footer{background:#fff; color:var(--text); font-size:14px; padding:32px 0 0}
+footer a{color:var(--ink); text-decoration:underline}
+footer .contact-block{display:flex; justify-content:center; gap:76px; flex-wrap:wrap;
+  align-items:flex-start; text-align:left}
+footer .contact-block p{margin:.28em 0; font-size:14px; text-wrap:pretty}
+footer .contact-block .label{display:inline-block; min-width:104px; color:#5a5a5a}
+footer .logo-bar{
+  display:flex; justify-content:center; align-items:center; gap:58px;
+  flex-wrap:wrap; margin-top:28px; padding-top:22px; border-top:1px solid #dcdcdc;
+}
+footer .logo-bar .unit{display:flex; align-items:center; gap:10px; min-height:52px}
+footer .logo-bar img{height:var(--logo-h,46px); max-width:190px; width:auto; object-fit:contain}
+footer .logo-bar span{font-size:13px; line-height:1.35; color:#3a3a3a; text-wrap:balance}
+footer h5{display:none}
+footer .base{
+  border-top:1px solid #e2e2e2; margin-top:22px; padding:14px 0 22px;
+  text-align:center; font-family:var(--sans); font-size:12px; color:var(--muted);
+}
+footer .base span{display:block; line-height:1.7}
+
+/* ---------- 모바일 ----------
+   좁은 화면에서는 "왼쪽 라벨 + 오른쪽 내용" 2단 배치를 모두 위아래로 푼다.
+   글이 좁은 칸에 갇혀 눌리지 않게 하고, 가로 스크롤이 생기지 않게 한다. */
+@media (max-width:860px){
+  :root{--wrap:100%}
+  body{font-size:16px; overflow-x:hidden}
+  .wrap{padding:0 18px}
+
+  /* 메뉴: 한 줄에 넣으면 넘치므로 2줄로 나눈다 */
+  .nav .inner{flex-wrap:wrap; padding:0}
+  .nav a{
+    flex:0 0 50%; font-size:15px; padding:12px 6px;
+    border-right:1px solid rgba(255,255,255,.30);
+    border-bottom:1px solid rgba(255,255,255,.18);
+  }
+  .nav a:nth-child(2n){border-right:0}
+  .nav a:nth-last-child(-n+2){border-bottom:0}
+
+  .masthead{padding:22px 0 20px}
+  .masthead .brand{width:56px}
+  .masthead .brand img{width:56px; height:56px}
+  .masthead h1{font-size:32px}
+  .masthead .lines{margin-top:16px; font-size:13px}
+
+  main{padding:26px 0 44px}
+  section{margin-bottom:38px}
+  h2.section-title{font-size:27px}
+
+  /* 페이지 안 앵커 메뉴: 2칸 또는 3칸으로 접는다 */
+  .subnav{justify-content:flex-start; gap:6px 10px; padding:10px 0}
+  .subnav a{flex:0 0 calc(50% - 6px); font-size:15px; text-align:left; line-height:1.35}
+  .subnav.cols-3 a{flex:0 0 calc(33.333% - 9px); font-size:13.5px}
+
+  /* 홈 소개 */
+  .intro{flex-direction:column; align-items:stretch; gap:18px}
+  .intro .who-card{max-width:none; text-align:center}
+  .intro .photo{width:100%}
+  .intro .photo img{height:auto}
+  .intro > div:not(.who-card):not(.photo){flex:none; width:100%}
+
+  /* 타임라인: 세로선과 점을 없애고 날짜를 위로 올린다 */
+  .timeline::before{display:none}
+  .tl-org{padding-left:0; margin-bottom:30px}
+  .tl-org::before{display:none}
+  .tl-date{
+    position:static; width:auto; text-align:left; padding:0;
+    margin-bottom:2px; font-size:15px;
+  }
+  .tl-org .org{font-size:18px}
+  .tl-proj{margin-top:16px; padding-left:0}
+  .tl-proj .tl-date{position:static; width:auto; text-align:left; margin:2px 0 4px}
+  .tl-proj .ptitle{padding-left:13px; text-indent:-13px}
+  .tl-proj ul{padding-left:2px}
+  .tl-proj li, .proj-block li{font-size:15px}
+
+  /* 표: 라벨을 위, 내용을 아래로 풀어 전체 폭을 쓴다 */
+  table.plain{display:block}
+  table.plain tbody, table.plain tr{display:block; width:100%}
+  table.plain tr{border-bottom:1px solid #bdbdbd; padding:10px 0}
+  table.plain tr:last-child{border-bottom:0}
+  table.plain td{display:block; width:100%; border:0; padding:0}
+  table.plain td.when{
+    width:auto; padding:0 0 3px; font-size:15px; white-space:normal;
+  }
+
+  /* 목록 */
+  ol.reflist > li{font-size:15px; padding-left:18px}
+  .gallery{grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:8px}
+  .gallery img{height:110px}
+  .bookgrid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:16px}
+  .bookgrid .bk img{height:160px}
+  .bookgrid.discography{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .bookgrid.discography .bk img{height:170px}
+  .media-entry{flex-direction:column; gap:10px}
+  .media-entry .pics img{width:120px; height:95px}
+  .entry-head .name{font-size:16px}
+
+  /* 푸터: 줄 간격을 좁히고 로고 크기를 하나로 맞춘다 */
+  footer{padding:26px 0 0}
+  footer .contact-block{flex-direction:column; gap:16px; text-align:center}
+  footer .contact-block > div{width:100%}
+  footer .contact-block p{margin:.1em 0; line-height:1.5; font-size:13.5px}
+  footer .contact-block .label{min-width:0; margin-right:6px}
+  footer .logo-bar{
+    justify-content:center; gap:20px 0; margin-top:20px; padding-top:18px;
+  }
+  footer .logo-bar .unit{flex:0 0 50%; min-height:0; justify-content:center}
+  footer .logo-bar img{height:32px; max-width:122px; margin:0 auto}   /* 4개를 같은 칸에 같은 크기로 */
+  footer .base{margin-top:16px; padding:12px 0 18px}
+}
+
+@media (max-width:400px){
+  .subnav a{flex:0 0 calc(50% - 6px)}
+  .subnav.cols-3 a{flex:0 0 calc(33.333% - 9px); font-size:12.5px}
+  footer .logo-bar img{height:29px; max-width:110px}
+}
+
+@media print{ .nav,.subnav,.cv-button{display:none} body{background:#fff} }

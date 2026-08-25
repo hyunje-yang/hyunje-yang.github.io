@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="intro">
+  <div class="who-card">
+    <h2>{{ profile.name }}</h2>
+    <p>{{ profile.affiliation.lab }}</p>
+    <p>{{ profile.affiliation.school }}</p>
+    <p class="highlight">{{ profile.affiliation.university }}</p>
+    <p>{{ profile.address }}</p>
+    <p><a href="mailto:{{ profile.email_school }}">{{ profile.email_school }}</a></p>
+    <a class="cv-button" href="assets/{{ profile.cv_pdf }}">DOWNLOAD FULL CV</a>
+  </div>
+  <div class="photo">
+    <img src="assets/{{ profile.portrait }}" alt="{{ profile.name }}">
+  </div>
+</section>
+
+<section id="research">
+  <h2 class="section-title">RESEARCH EXPERIENCE</h2><div class="rule"></div>
+
+  <div class="timeline">
+  {%- for org in cv.research_experience %}
+    <div class="tl-org">
+      {%- if org.logo %}<div class="org-mark" style="background-image:url('assets/{{ org.logo }}')"></div>{% endif %}
+      <div class="tl-date">{{ org.period.replace(' - ', ' – ') }}</div>
+      <div class="head">
+        <div class="org">{{ org.org }}{% if org.abbr %} ({{ org.abbr }}){% endif %}</div>
+        <div class="role">{{ org.role }} &middot; {{ org.location }}</div>
+        {%- if org.note %}<div class="note">{{ org.note }}</div>{% endif %}
+      </div>
+
+      {%- for p in org.projects %}
+      <div class="tl-proj">
+        <div class="ptitle">{{ p.title }}</div>
+        <div class="tl-date">{{ p.period.replace(' - ', ' – ') }}</div>
+        <ul>
+          {%- for b in p.bullets %}<li>{{ b }}</li>{% endfor %}
+        </ul>
+        {%- if p.note %}<div class="pnote">&#8251; {{ p.note }}</div>{% endif %}
+      </div>
+      {%- endfor %}
+    </div>
+  {%- endfor %}
+  </div>
+</section>
+
+<section id="education">
+  <h2 class="section-title">EDUCATION</h2><div class="rule"></div>
+  <table class="plain">
+  {%- for e in cv.education %}
+    <tr>
+      <td class="when">{{ e.period.replace(' - ', ' – ') }}</td>
+      <td>
+        <strong>{{ e.school }}</strong>{% if e.abbr %} ({{ e.abbr }}){% endif %} &middot; <span class="muted">{{ e.location }}</span><br>
+        {{ e.degree }}
+        {%- if e.notes %}<ul style="margin:6px 0 0;padding-left:20px">
+          {%- for n in e.notes %}<li>{{ n }}</li>{% endfor %}
+        </ul>{% endif %}
+      </td>
+    </tr>
+  {%- endfor %}
+  </table>
+</section>
+
+{% endblock %}
