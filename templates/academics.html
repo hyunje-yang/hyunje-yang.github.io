@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="subnav cols-2">
+<div class="subnav cols-3">
   <a href="#publications">Publications</a>
   <a href="#conferences">Conferences</a>
-  <a href="#gallery">Research Experience</a>
   <a href="#books">Books</a>
 </div>
 
@@ -64,21 +63,6 @@
     </li>
   {%- endfor %}
   </ol>
-</section>
-
-<section id="gallery">
-  <h2 class="section-title">RESEARCH EXPERIENCE</h2><div class="rule"></div>
-  {%- for g in cv.research_gallery %}
-  <div class="proj-block">
-    <h3>{{ g.title }}</h3>
-    <ul>{% for b in g.bullets %}<li>{{ b }}</li>{% endfor %}</ul>
-    {%- if g.images %}
-    <div class="gallery">
-      {%- for im in g.images %}<a href="assets/{{ im }}"><img src="assets/{{ im }}" alt="" loading="lazy"></a>{% endfor %}
-    </div>
-    {%- endif %}
-  </div>
-  {%- endfor %}
 </section>
 
 <section id="books">

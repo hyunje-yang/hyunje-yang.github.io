@@ -49,15 +49,6 @@
     </div>
   {%- endfor %}
   </div>
-
-  {%- for o in cv.music.other_activities %}
-  <h4>{{ o.org }}</h4>
-  <div class="entry-head">
-    <span class="name">{{ o.role }}</span>
-    <span class="period">{{ o.period.replace(' - ', ' – ') }}</span>
-  </div>
-  <p>{{ o.note }}</p>
-  {%- endfor %}
 </section>
 
 <section id="patents">
@@ -101,7 +92,7 @@
 
 <section id="extracurricular">
   <h2 class="section-title">EXTRACURRICULAR</h2><div class="rule"></div>
-  <table class="plain">
+  <table class="plain grouped">
   {%- for g in cv.extracurricular %}
     <tr>
       <td class="when">{{ g.group }}</td>

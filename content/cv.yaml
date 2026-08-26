@@ -604,9 +604,9 @@ peer_review:
 # ----------------------------------------------------------------------------- TECHNICAL SKILLS
 skills:
   - group: Programming
-    detail: Python, SFINCS, ADCIRC, SWAN, MATLAB, ArcGIS, QGIS
+    detail: Python, MATLAB, ArcGIS, QGIS
   - group: Modeling
-    detail: Geometry-aware neural operators, physics-constrained deep learning, diffusion models, hydrological simulation modeling
+    detail: Geometry-aware neural operators, physics-constrained deep learning, diffusion models, hydrodynamic models (SFINCS, ADCIRC)
   - group: High-Performance Computing
     detail: GPU-accelerated model training and inference on HPC systems; multi-GPU and distributed training workflows
   - group: Experimental and Field
@@ -620,7 +620,7 @@ music:
   start: 2014-05
   summary:
     - Founded and led a rock band; performed as a songwriter, vocalist, pianist, and guitarist.
-    - Performed in numerous band concerts; placed top 3 in the 2015 SNU Student Band Competition and received a grant for music recording.
+    - Performed in numerous band concerts; placed top 2 in the 2015 SNU Student Band Competition and received a grant for music recording.
   members:
     - {role: Vocal,   name: Hyunje Yang}
     - {role: Guitars, name: "Youngmin Yoon, Hyunje Yang"}

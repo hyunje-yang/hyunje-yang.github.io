@@ -113,11 +113,11 @@ h4::after{content:""; display:block; width:120px; height:1px; background:#9a9a9a
   width:1px; background:#adadad;
 }
 .tl-org{position:relative; margin:0 0 38px; padding-left:250px}
-.tl-org .org-mark{                     /* 기관 로고를 아주 흐리게 뒤에 깐다 */
+.tl-org .org-mark{                     /* 기관 로고를 흐리게 뒤에 깐다 */
   position:absolute; right:6px; top:2px;
   width:240px; height:120px;
   background-repeat:no-repeat; background-position:right top; background-size:contain;
-  opacity:.085; pointer-events:none; z-index:0;
+  opacity:.20; pointer-events:none; z-index:0;
 }
 .tl-org > .head, .tl-org .tl-proj{position:relative; z-index:1}
 .tl-org:last-child{margin-bottom:0}
@@ -290,7 +290,12 @@ footer .base span{display:block; line-height:1.7}
     position:static; width:auto; text-align:left; padding:0;
     margin-bottom:2px; font-size:15px;
   }
-  .tl-org .org{font-size:18px}
+  .tl-org .org{
+    font-size:18px; padding-left:17px; text-indent:-17px;   /* 둘째 줄은 글자 시작선에 맞춤 */
+  }
+  .tl-org .org::before{content:"\25A0\00A0"; font-size:11px; color:#8e8e8e; vertical-align:2px}
+  .tl-org .role, .tl-org .note{padding-left:17px}
+  .tl-org .org-mark{opacity:.14}      /* 좁은 화면에서는 글자와 겹치므로 조금 연하게 */
   .tl-proj{margin-top:16px; padding-left:0}
   .tl-proj .tl-date{position:static; width:auto; text-align:left; margin:2px 0 4px}
   .tl-proj .ptitle{padding-left:13px; text-indent:-13px}
@@ -306,6 +311,17 @@ footer .base span{display:block; line-height:1.7}
   table.plain td.when{
     width:auto; padding:0 0 3px; font-size:15px; white-space:normal;
   }
+  /* 그룹 라벨(Membership / Leadership / Military Service)은 아래 항목 이름과
+     굵기가 같아 제목으로 보이지 않는다. 대문자 + 자간 + 주황 ■ 로 구분한다. */
+  table.plain.grouped td.when{
+    font-size:15px; text-transform:uppercase; letter-spacing:.09em;
+    padding:0 0 9px 18px; text-indent:-18px;
+  }
+  table.plain.grouped td.when::before{
+    content:"\25A0\00A0"; font-size:11px; color:var(--orange); vertical-align:1px;
+    letter-spacing:0;
+  }
+  table.plain.grouped tr{padding:15px 0}
 
   /* 목록 */
   ol.reflist > li{font-size:15px; padding-left:18px}
