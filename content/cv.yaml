@@ -606,7 +606,7 @@ skills:
   - group: Programming
     detail: Python, MATLAB, ArcGIS, QGIS
   - group: Modeling
-    detail: Geometry-aware neural operators, physics-constrained deep learning, diffusion models, hydrodynamic models (SFINCS, ADCIRC)
+    detail: Geometry-aware neural operators, hydrodynamic models (SFINCS, ADCIRC), physics-constrained deep learning, diffusion models
   - group: High-Performance Computing
     detail: GPU-accelerated model training and inference on HPC systems; multi-GPU and distributed training workflows
   - group: Experimental and Field
