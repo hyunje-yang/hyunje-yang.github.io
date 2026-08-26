@@ -50,8 +50,8 @@ research_experience:
     start: 2026-05
     end: 2026-07
     projects:
-      - title: Artificial Intelligence for Advancing Coastal Resilience
-        period: May 2026 - Jul. 2026
+      - title: Artificial Intelligence for Advancing Coastal Resilience (Ongoing Research Collaboration)
+        period: May 2026 - Present
         start: 2026-05
         bullets:
           - Developed a geometry-aware neural operator for cross-regional storm surge prediction across diverse coastal geometries.
