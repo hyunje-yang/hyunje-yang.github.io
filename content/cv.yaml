@@ -26,7 +26,7 @@ education:
     period: Mar. 2016 - Feb. 2018
     start: 2016-03
     notes:
-      - "Thesis: Formula for Calculating Mean Velocity in Mountain Streams using the Salt Dilution Method (Advisor: Prof. Sangjun Im)"
+      - "Thesis: Formula for Calculating Mean Velocity in Mountain Streams Using the Salt Dilution Method"
       - "Teaching Assistant, Forest Geological Information (Spring 2016)"
 
   - school: Seoul National University
@@ -298,6 +298,13 @@ books:
 # ----------------------------------------------------------------------------- CONFERENCE PRESENTATIONS
 conferences:
   oral:
+    - authors: Yang, H., Li, Z., Lee, J.W., Kim, T., Le, P.V.V.
+      title: Multi-GPU Training of Geometry-Aware Neural Operators for Cross-Regional Storm Surge Prediction
+      venue: TACC Symposium for Texas Researchers 26 (TACCSTER 26)
+      location: Texas, USA
+      date: Sep. 21-22, 2026
+      year: 2026
+
     - authors: Yang, H., Lee, J.W., Santos Cruz, A.U., Subgranon, A., Klepac, S.P., Jiao, J.
       title: Can Hurricane, Surge, and Damage Data Assist in Reconstructing Structural Features?
       venue: 10th Young Coastal Scientists and Engineers Conference - Americas
