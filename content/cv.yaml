@@ -85,8 +85,8 @@ research_experience:
     note_in_cv: false          # EDUCATION 에 이미 있으므로 CV(docx)에서는 생략
     projects:
       - title: Mask-Aware Multimodal Deep Operator Network for Spatially Contiguous Mapping of Soil Water Retention Curves
-        period: May 2026 - Present
-        start: 2026-05
+        period: Feb. 2026 - Present
+        start: 2026-02
         bullets:
           - Developing a physically constrained DeepONet that integrates soil physicochemical and topographic information while accommodating missing input variables.
           - Generating continuous soil water retention curves and spatially contiguous soil hydraulic property maps at 30 m resolution.
