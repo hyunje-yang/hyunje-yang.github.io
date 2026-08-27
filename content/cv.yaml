@@ -53,7 +53,7 @@ research_experience:
       - role: Graduate Research Intern    # location 을 적지 않으면 기관 위치를 그대로 쓴다
         period: May 2026 - Jul. 2026
       - role: Research Collaborator
-        period: May 2026 - Present
+        period: Jul. 2026 - Present
         location: Austin, TX, USA (Remote)
     projects:
       - title: Geometry-aware neural operators to scale storm-surge prediction from local coastal domains toward regional-to-global coverage on unstructured meshes
