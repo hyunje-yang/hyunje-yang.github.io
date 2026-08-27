@@ -26,7 +26,17 @@
       <div class="tl-date">{{ org.period.replace(' - ', ' – ') }}</div>
       <div class="head">
         <div class="org">{{ org.org }}{% if org.abbr %} ({{ org.abbr }}){% endif %}</div>
+        {%- if org.roles %}
+        {%- for r in org.roles %}
+        <div class="tl-role">
+          <div class="tl-date">{{ r.period.replace(' - ', ' – ') }}</div>
+          <div class="role">{{ r.role }}{% set loc = r.location if r.location else (org.location if loop.first else none) %}
+            {%- if loc %}<span class="rsep"> &middot; </span><span class="rloc">{{ loc }}</span>{% endif %}</div>
+        </div>
+        {%- endfor %}
+        {%- else %}
         <div class="role">{{ org.role }} &middot; {{ org.location }}</div>
+        {%- endif %}
         {%- if org.note %}<div class="note">{{ org.note }}</div>{% endif %}
       </div>
 
@@ -34,9 +44,9 @@
       <div class="tl-proj">
         <div class="ptitle">{{ p.title }}</div>
         <div class="tl-date">{{ p.period.replace(' - ', ' – ') }}</div>
-        <ul>
+        {%- if p.bullets %}<ul>
           {%- for b in p.bullets %}<li>{{ b }}</li>{% endfor %}
-        </ul>
+        </ul>{% endif %}
         {%- if p.note %}<div class="pnote">&#8251; {{ p.note }}</div>{% endif %}
       </div>
       {%- endfor %}

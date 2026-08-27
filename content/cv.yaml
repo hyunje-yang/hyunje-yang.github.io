@@ -46,17 +46,32 @@ research_experience:
     abbr: ORNL
     location: Oak Ridge, TN, USA
     role: Graduate Research Intern
-    period: May 2026 - Jul. 2026
+    period: May 2026 - Jul. 2026          # 기관 왼쪽 큰 날짜는 현장 근무 기간만 적는다
     start: 2026-05
     end: 2026-07
+    roles:                       # 한 기관에서 역할이 둘 이상이면 여기에 순서대로 적는다
+      - role: Graduate Research Intern    # location 을 적지 않으면 기관 위치를 그대로 쓴다
+        period: May 2026 - Jul. 2026
+      - role: Research Collaborator
+        period: May 2026 - Present
+        location: Austin, TX, USA (Remote)
     projects:
-      - title: Artificial Intelligence for Advancing Coastal Resilience (Ongoing Research Collaboration)
+      - title: Geometry-aware neural operators to scale storm-surge prediction from local coastal domains toward regional-to-global coverage on unstructured meshes
         period: May 2026 - Present
         start: 2026-05
         bullets:
-          - Developed a geometry-aware neural operator for cross-regional storm surge prediction across diverse coastal geometries.
-          - Investigated the impacts of hurricanes on coastal wetland ecosystems.
-          - Developed a diffusion-based storm surge reconstruction model to generate time series storm surge.
+          - Developing geometry-aware neural operators that learn storm-surge dynamics and local geometry interaction on unstructured coastal meshes.
+          - Evaluating generalization across unseen coastal geometries to scale a unified deep learning framework toward regional-to-global coverage.
+
+      - title: Investigating coastal wetland resistance and recovery using global tropical-cyclone records and satellite observations
+        period: May 2026 - Present
+        start: 2026-05
+        bullets: []
+
+      - title: Developing a diffusion-based surrogate for reconstructing historical storm-surge dynamics
+        period: May 2026 - Present
+        start: 2026-05
+        bullets: []
 
   - org: The University of Texas at Austin
     logo: img/logos/ut-austin.png          # 홈 화면에서 이 기관 뒤에 은은하게 깔린다
@@ -69,6 +84,20 @@ research_experience:
     note: UT Austin Engineering Fellowship, Cockrell School of Engineering and UT Austin Graduate School
     note_in_cv: false          # EDUCATION 에 이미 있으므로 CV(docx)에서는 생략
     projects:
+      - title: Mask-Aware Multimodal Deep Operator Network for Spatially Contiguous Mapping of Soil Water Retention Curves
+        period: May 2026 - Present
+        start: 2026-05
+        bullets:
+          - Developing a physically constrained DeepONet that integrates soil physicochemical and topographic information while accommodating missing input variables.
+          - Generating continuous soil water retention curves and spatially contiguous soil hydraulic property maps at 30 m resolution.
+
+      - title: Texas-Scale Assessment of Multi-Driver Compoundedness in Coastal Flooding
+        period: Jan. 2026 - Present
+        start: 2026-01
+        bullets:
+          - Quantifying the relative contributions and spatial patterns of storm surge, rainfall, and river discharge across historical storms.
+          - Identifying storm- and location-dependent shifts in dominant flood drivers.
+
       - title: Physics-Informed Machine Learning for Compound Flooding Prediction
         period: May 2025 - Present
         start: 2025-05
@@ -300,7 +329,7 @@ conferences:
   oral:
     - authors: Yang, H., Li, Z., Lee, J.W., Kim, T., Le, P.V.V.
       title: Multi-GPU Training of Geometry-Aware Neural Operators for Cross-Regional Storm Surge Prediction
-      venue: TACC Symposium for Texas Researchers 26 (TACCSTER 26)
+      venue: TACC Symposium for Texas Researchers 26
       location: Texas, USA
       date: Sep. 21-22, 2026
       year: 2026

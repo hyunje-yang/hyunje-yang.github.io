@@ -271,7 +271,11 @@ def build_docx(profile, cv):
     for org in cv["research_experience"]:
         name = org["org"] + (f' ({org["abbr"]})' if org.get("abbr") else "")
         two_col(doc, name, org["location"], size=10.5, bold=True)
-        two_col(doc, org["role"], dash(org["period"]), size=10, italic=True)
+        for r in org.get("roles") or [{"role": org["role"], "period": org["period"]}]:
+            label = r["role"]
+            if r.get("location"):            # 기관 위치와 다를 때만 역할 줄에 적는다
+                label += " \u00b7 " + r["location"]
+            two_col(doc, label, dash(r["period"]), size=10, italic=True)
         if org.get("note") and org.get("note_in_cv", True):
             p = para(doc, size=10, italic=True, keep_next=True)
             run(p, org["note"])

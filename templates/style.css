@@ -136,6 +136,12 @@ h4::after{content:""; display:block; width:120px; height:1px; background:#9a9a9a
 .tl-org .org{font-size:19px; font-weight:700; color:var(--ink-deep); text-wrap:balance}
 .tl-org .role{font-style:italic; font-size:16px; color:var(--text)}
 .tl-org .note{font-style:italic; font-size:15px; color:var(--text)}
+.tl-org .tl-role{position:relative}      /* 한 기관에 역할이 둘 이상일 때 각 역할에 기간을 붙인다 */
+.tl-org .tl-role .tl-date{
+  position:absolute; left:-250px; width:206px; text-align:right; top:1px;
+  font-weight:400; font-style:italic; font-size:15px; color:var(--text);
+  white-space:nowrap;
+}
 
 .tl-proj{position:relative; margin:16px 0 0; padding-left:16px; border:0}
 .tl-proj .ptitle{
@@ -295,6 +301,12 @@ footer .base span{display:block; line-height:1.7}
   }
   .tl-org .org::before{content:"\25A0\00A0"; font-size:11px; color:#8e8e8e; vertical-align:2px}
   .tl-org .role, .tl-org .note{padding-left:17px}
+  .tl-org .tl-role .tl-date{           /* 좁은 화면에서는 역할 기간도 역할 위로 올린다 */
+    position:static; left:auto; width:auto; text-align:left;
+    margin:6px 0 0; padding-left:17px; font-size:14px;
+  }
+  .tl-org .tl-role .rsep{display:none}   /* 좁은 화면에서는 위치를 역할 아래 줄로 내린다 */
+  .tl-org .tl-role .rloc{display:block; white-space:nowrap}
   .tl-org .org-mark{opacity:.14}      /* 좁은 화면에서는 글자와 겹치므로 조금 연하게 */
   .tl-proj{margin-top:16px; padding-left:0}
   .tl-proj .tl-date{position:static; width:auto; text-align:left; margin:2px 0 4px}
