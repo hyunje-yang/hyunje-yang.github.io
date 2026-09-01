@@ -107,13 +107,18 @@ h4::after{content:""; display:block; width:120px; height:1px; background:#9a9a9a
 .cv-button:hover{background:#fff; color:var(--ink-deep)}
 
 /* ---------- 홈 : 연구 관심 분야 ----------
-   제목은 굵은 남보라, 설명은 따뜻한 갈색. 네 칸이 같은 높이에서 시작한다. */
+   네 칸을 가운데 정렬하고, 칸과 칸 사이에 아주 연한 회색 세로선을 둔다.
+   선은 gap 이 아니라 칸의 왼쪽 테두리로 그린다. 그래야 두 칸의 정확히 가운데에 놓인다. */
 .vision{
   font-size:18px; line-height:1.55; color:var(--text);
   text-wrap:pretty; margin:0 0 30px;
 }
 .vision strong{color:var(--ink-deep)}
-.interests{display:grid; grid-template-columns:repeat(4,1fr); gap:0 32px}
+.interests{display:grid; grid-template-columns:repeat(4,1fr); gap:0}
+.interests .ri{text-align:center; padding:0 20px}
+.interests .ri + .ri{border-left:1px solid rgba(0,0,0,.12)}
+.interests .ri:first-child{padding-left:0}      /* 바깥쪽 끝은 본문 좌우 끝에 맞춘다 */
+.interests .ri:last-child{padding-right:0}
 .interests .ri-title{
   font-weight:700; color:var(--ink-deep); margin-bottom:10px;
   text-wrap:balance; line-height:1.35;
@@ -308,7 +313,12 @@ footer .base span{display:block; line-height:1.7}
 
   /* 연구 관심 분야: 4칸을 2칸으로 접는다 */
   .vision{font-size:17px; margin-bottom:24px}
-  .interests{grid-template-columns:repeat(2,1fr); gap:22px 24px}
+  .interests{grid-template-columns:repeat(2,1fr); row-gap:26px}
+  /* 2칸일 때는 각 줄의 오른쪽 칸에만 세로선을 둔다 (왼쪽 칸에 두면 줄 맨 앞에 선이 생긴다) */
+  .interests .ri{padding:0 16px}
+  .interests .ri + .ri{border-left:0}
+  .interests .ri:nth-child(2n){border-left:1px solid rgba(0,0,0,.12); padding-right:0}
+  .interests .ri:nth-child(2n+1){padding-left:0}
   .interests .ri-title{min-height:0}   /* 2칸에서는 제목이 모두 한 줄이라 자리를 비워 둘 필요가 없다 */
   .interests .ri-desc{font-size:15px}
 
@@ -387,7 +397,10 @@ footer .base span{display:block; line-height:1.7}
 
 @media (max-width:560px){
   /* 더 좁으면 한 줄에 하나씩 (2단 배치를 푼다) */
-  .interests{grid-template-columns:1fr; gap:18px}
+  /* 한 칸씩 세울 때는 세로선과 좌우 여백을 모두 없앤다 */
+  .interests{grid-template-columns:1fr; row-gap:20px}
+  .interests .ri{padding:0; border-left:0}
+  .interests .ri:nth-child(2n){border-left:0; padding-right:0}
 }
 
 @media (max-width:400px){
