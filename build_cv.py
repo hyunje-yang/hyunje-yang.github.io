@@ -125,6 +125,23 @@ def link(p, url, text=None, size=10):
     p._p.append(h)
 
 
+INTEREST_COL2 = Inches(3.6)          # RESEARCH INTERESTS 둘째 칸의 점(●) 자리
+INTEREST_COL2_TEXT = Inches(3.8)     # 그 글자가 시작하는 자리 (첫째 칸과 같은 0.2in 간격)
+
+
+def dot_marker(p):
+    """줄 가운데에 직접 찍는 ● 표시.
+    번호매기기(numId 6)가 쓰는 것과 같은 Wingdings 글자·같은 12pt 라서
+    첫째 칸의 점과 크기·모양이 정확히 같다."""
+    r = p.add_run("\uF09F")
+    rPr = r._element.get_or_add_rPr()
+    f = OxmlElement("w:rFonts")
+    for tag in ("w:ascii", "w:hAnsi"):
+        f.set(qn(tag), "Wingdings")
+    rPr.append(f)
+    r.font.size = Pt(12)
+
+
 def right_tab(p):
     """오른쪽 끝에 붙일 항목 앞에 넣는 탭. 위치는 본문 오른쪽 끝."""
     p.paragraph_format.tab_stops.add_tab_stop(RIGHT_EDGE, WD_TAB_ALIGNMENT.RIGHT)
@@ -307,12 +324,22 @@ def build_docx(profile, cv):
 
     # ---------- RESEARCH INTERESTS ----------
     # 홈 화면과 달리 CV 에는 제목 네 개만 싣는다 (설명 문장은 홈 화면 전용).
+    # 한 줄에 두 개씩 놓는다. 둘째 칸은 왼쪽 탭 스톱 하나로 세로를 맞춘다.
     if cv.get("research_interests"):
         section(doc, "RESEARCH INTERESTS")
-        for it in cv["research_interests"]:
-            p = para(doc, size=10, num=NUM_DOT,
+        titles = [it["title"] for it in cv["research_interests"]]
+        for i in range(0, len(titles), 2):
+            p = para(doc, size=10, num=NUM_DOT, align="left",
                      left_indent=Inches(0.2), hanging=Inches(0.2))
-            run(p, it["title"])
+            for stop in (INTEREST_COL2, INTEREST_COL2_TEXT):
+                p.paragraph_format.tab_stops.add_tab_stop(
+                    stop, WD_TAB_ALIGNMENT.LEFT)
+            run(p, titles[i])
+            if i + 1 < len(titles):
+                p.add_run("\t")
+                dot_marker(p)
+                p.add_run("\t")
+                run(p, titles[i + 1])
         blank(doc)
 
     # ---------- RESEARCH EXPERIENCE ----------
