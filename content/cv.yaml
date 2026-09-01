@@ -782,3 +782,22 @@ extracurricular:
         period: Apr. 2019 - Apr. 2022
       - text: 5th Company Commander Trainee, Korea Army Training Center
         period: May 2020
+
+# ----------------------------------------------------------------------------- REFERENCES
+# CV 맨 끝에 실린다 (전체 판·짧은 판 모두). 이름만 굵게 나온다.
+references:
+  - name: Jun-Whan Lee, Ph.D.
+    title: Assistant Professor
+    dept: Maseeh Department of Civil, Architectural and Environmental Engineering
+    org: University of Texas at Austin
+    email: junwhanlee@austin.utexas.edu
+  - name: Phong V. V. Le, Ph.D.
+    title: R&D Staff Member
+    dept: Environmental Sciences Division
+    org: Oak Ridge National Laboratory
+    email: lepv@ornl.gov
+  - name: Wonhyun Lee, Ph.D.
+    title: Research Assistant Professor
+    dept: Bureau of Economic Geology
+    org: University of Texas at Austin
+    email: wonhyun.lee@beg.utexas.edu

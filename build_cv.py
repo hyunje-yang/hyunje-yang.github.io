@@ -293,6 +293,25 @@ def dash(period):
     return period.replace(" - ", " – ") if period else period
 
 
+def references(doc, cv):
+    """CV 맨 끝의 추천인. 이름만 굵게, 나머지는 보통. 한 사람이 한 덩어리다."""
+    if not cv.get("references"):
+        return
+    section(doc, "REFERENCES")
+    for i, r in enumerate(cv["references"]):
+        p = para(doc, size=10, align="left", keep_next=True,
+                 space_before=0 if i == 0 else 6)
+        run(p, r["name"], bold=True)
+        for field in ("title", "dept", "org"):
+            if r.get(field):
+                p = para(doc, size=10, align="left", keep_next=True)
+                run(p, r[field])
+        if r.get("email"):
+            p = para(doc, size=10, align="left")
+            run(p, "Email: ")
+            link(p, f'mailto:{r["email"]}', r["email"])
+
+
 # --------------------------------------------------------------------------- 본문
 def build_docx(profile, cv, short=False):
     """short=True 면 짧은 판을 만든다.
@@ -447,7 +466,8 @@ def build_docx(profile, cv, short=False):
         run(p, s["group"] + ": ", bold=True)
         run(p, s["detail"])
 
-    if short:                             # 짧은 판은 여기까지
+    if short:                             # 짧은 판은 추천인까지만
+        references(doc, cv)
         return doc
 
     # ---------- AWARDS AND HONORS ----------
@@ -491,6 +511,9 @@ def build_docx(profile, cv, short=False):
             for sub in e.get("sub", []):
                 p = para(doc, size=10, left_indent=Inches(0.6))
                 run(p, sub)
+
+    # ---------- REFERENCES ----------
+    references(doc, cv)
 
     return doc
 
