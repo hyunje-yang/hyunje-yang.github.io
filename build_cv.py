@@ -450,7 +450,8 @@ def build_docx(profile, cv):
         f'{d["kind"]} “{m["band"]} - {d["title"]}” ({d["year"]})' for d in m["discography"])
     run(p, disc + ".")
     for o in m.get("other_activities", []):
-        two_col(doc, f'{o["role"]}, {o["org"]}', dash(o["period"]), size=10, bold=True)
+        two_col(doc, f'{o["role"]}, {o["org"]}', dash(o["period"]), size=10, bold=True,
+                space_before=4)
         if o.get("note"):
             bullet(doc, o["note"])
 
