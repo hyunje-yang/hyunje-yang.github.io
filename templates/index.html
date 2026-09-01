@@ -9,7 +9,12 @@
     <p class="highlight">{{ profile.affiliation.university }}</p>
     <p>{{ profile.address }}</p>
     <p><a href="mailto:{{ profile.email_school }}">{{ profile.email_school }}</a></p>
-    <a class="cv-button" href="assets/{{ profile.cv_pdf }}">DOWNLOAD FULL CV</a>
+    <div class="cv-links">
+      <a class="cv-button" href="assets/{{ profile.cv_pdf }}">DOWNLOAD FULL CV</a>
+      {%- if profile.cv_pdf_short %}
+      <a class="cv-button alt" href="assets/{{ profile.cv_pdf_short }}">SHORT CV</a>
+      {%- endif %}
+    </div>
   </div>
   <div class="photo">
     <img src="assets/{{ profile.portrait }}" alt="{{ profile.name }}">

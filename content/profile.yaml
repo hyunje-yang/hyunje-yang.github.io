@@ -32,6 +32,11 @@ brand_logo: img/logos/muguet-white.png
 
 # "DOWNLOAD FULL CV" 버튼이 가리키는 파일
 cv_pdf: pdf/Hyunje-Yang-CV.pdf
+# "SHORT CV" 버튼이 가리키는 파일 (연구 경력의 세부 항목을 뺀 짧은 판)
+cv_pdf_short: pdf/Hyunje-Yang-CV-Short.pdf
+# 짧은 판 머리글에서 "전체 CV 는 여기" 라고 가리킬 주소
+cv_url: https://hyunjeyang.com/assets/pdf/Hyunje-Yang-CV.pdf
+cv_url_label: hyunjeyang.com
 
 links:
   orcid:

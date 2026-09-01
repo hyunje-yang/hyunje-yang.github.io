@@ -105,6 +105,12 @@ h4::after{content:""; display:block; width:120px; height:1px; background:#9a9a9a
   text-decoration:none; border:1px solid var(--ink-deep);
 }
 .cv-button:hover{background:#fff; color:var(--ink-deep)}
+/* CV 버튼 두 개(전체 판 / 짧은 판)를 가운데에 나란히 놓는다.
+   좁으면 위아래로 접힌다. 짧은 판은 테두리만 두어 전체 판을 앞에 세운다. */
+.cv-links{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:20px}
+.cv-links .cv-button{margin-top:0}
+.cv-button.alt{background:#fff; color:var(--ink-deep)}
+.cv-button.alt:hover{background:var(--ink-deep); color:#fff}
 
 /* ---------- 홈 : 연구 관심 분야 ----------
    네 칸을 가운데 정렬하고, 칸과 칸 사이에 아주 연한 회색 세로선을 둔다.
@@ -308,6 +314,9 @@ footer .base span{display:block; line-height:1.7}
   .intro{flex-direction:column; align-items:stretch; gap:18px}
   .intro .who-card{max-width:none; text-align:center}
   .intro .photo{width:100%}
+  /* CV 버튼 두 개는 좁은 화면에서 위아래로 놓고 폭을 같게 맞춘다 */
+  .cv-links{flex-direction:column; align-items:center}
+  .cv-links .cv-button{width:100%; max-width:260px; text-align:center; padding:12px 0}
   .intro .photo img{height:auto}
   .intro > div:not(.who-card):not(.photo){flex:none; width:100%}
 

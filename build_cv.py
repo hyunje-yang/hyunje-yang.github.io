@@ -36,6 +36,8 @@ TEMPLATE = ROOT / "templates" / "cv-template.docx"
 OUT_DIR = ROOT / "assets" / "pdf"
 OUT_DOCX = OUT_DIR / "Hyunje-Yang-CV.docx"
 OUT_PDF = OUT_DIR / "Hyunje-Yang-CV.pdf"
+OUT_DOCX_SHORT = OUT_DIR / "Hyunje-Yang-CV-Short.docx"
+OUT_PDF_SHORT = OUT_DIR / "Hyunje-Yang-CV-Short.pdf"
 
 RIGHT_EDGE = Inches(7.5)          # 용지 8.5in - 좌우 여백 0.5in
 LINK_COLOR = "199CFF"             # 기존 CV 가 쓰던 파란색 (RGB 25,156,255)
@@ -292,7 +294,14 @@ def dash(period):
 
 
 # --------------------------------------------------------------------------- 본문
-def build_docx(profile, cv):
+def build_docx(profile, cv, short=False):
+    """short=True 면 짧은 판을 만든다.
+
+    싣는 것: EDUCATION / RESEARCH INTERESTS / RESEARCH EXPERIENCE /
+             PUBLICATIONS / CONFERENCE PRESENTATIONS / PEER-REVIEW SERVICE /
+             TECHNICAL SKILLS
+    빼는 것: 연구 경력의 대시(–) 세부 항목과 과제 기간, 그리고 그 아래 모든 절
+             (특허, 수상, 음악, 대외활동)."""
     doc = Document(str(TEMPLATE))
     clear_body(doc)
 
@@ -306,6 +315,11 @@ def build_docx(profile, cv):
     if profile.get("site_url"):
         run(p, " | ")
         link(p, profile["site_url"])
+    if short:
+        p = para(doc, size=9, italic=True, align="center", space_before=3)
+        run(p, "Short version. Full CV available at ")
+        link(p, profile.get("cv_url", profile.get("site_url", "")),
+             profile.get("cv_url_label", "hyunjeyang.com"), size=9)
 
     # ---------- EDUCATION ----------
     section(doc, "EDUCATION")
@@ -359,6 +373,8 @@ def build_docx(profile, cv):
             p = para(doc, size=10, num=NUM_DOT, keep_next=True,
                      left_indent=Inches(0.2), hanging=Inches(0.2))
             run(p, prj["title"])
+            if short:                     # 짧은 판은 과제 제목만 남기고 기간·세부를 뺀다
+                continue
             tail_right(p, prj["title"], dash(prj["period"]), indent_in=0.2, italic=True)
             for b in prj["bullets"]:
                 bullet(doc, b)
@@ -417,11 +433,12 @@ def build_docx(profile, cv):
         run(p, j)
 
     # ---------- REGISTERED PATENTS ----------
-    section(doc, "REGISTERED PATENTS")
-    for pt in cv["patents"]["list"]:
-        p = para(doc, size=10, num=NUM_DASH)
-        run(p, pt["title"])
-        tail_right(p, pt["title"], pt["date"], indent_in=0.25, italic=True)
+    if not short:
+        section(doc, "REGISTERED PATENTS")
+        for pt in cv["patents"]["list"]:
+            p = para(doc, size=10, num=NUM_DASH)
+            run(p, pt["title"])
+            tail_right(p, pt["title"], pt["date"], indent_in=0.25, italic=True)
 
     # ---------- TECHNICAL SKILLS ----------
     section(doc, "TECHNICAL SKILLS")
@@ -429,6 +446,9 @@ def build_docx(profile, cv):
         p = para(doc, size=10, num=NUM_DASH)
         run(p, s["group"] + ": ", bold=True)
         run(p, s["detail"])
+
+    if short:                             # 짧은 판은 여기까지
+        return doc
 
     # ---------- AWARDS AND HONORS ----------
     section(doc, "AWARDS AND HONORS")
@@ -542,13 +562,13 @@ def main():
         return 1
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    doc = build_docx(profile, cv)
-    doc.save(str(OUT_DOCX))
-    print(f"  만듦  assets/pdf/{OUT_DOCX.name}")
-
-    if "--no-pdf" not in sys.argv:
-        if to_pdf(OUT_DOCX, OUT_PDF):
-            print(f"  만듦  assets/pdf/{OUT_PDF.name}  (Word 변환)")
+    for short, docx_path, pdf_path in ((False, OUT_DOCX, OUT_PDF),
+                                       (True, OUT_DOCX_SHORT, OUT_PDF_SHORT)):
+        doc = build_docx(profile, cv, short=short)
+        doc.save(str(docx_path))
+        print(f"  만듦  assets/pdf/{docx_path.name}")
+        if "--no-pdf" not in sys.argv and to_pdf(docx_path, pdf_path):
+            print(f"  만듦  assets/pdf/{pdf_path.name}  (Word 변환)")
     return 0
 
 

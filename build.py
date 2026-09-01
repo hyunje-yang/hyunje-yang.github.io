@@ -90,9 +90,9 @@ def check(profile, cv):
     """빠뜨리기 쉬운 것들을 미리 잡아 준다."""
     problems = []
 
-    pdf = ASSETS / profile["cv_pdf"]
-    if not pdf.exists():
-        problems.append(f"CV 파일이 없습니다: assets/{profile['cv_pdf']}")
+    for key in ("cv_pdf", "cv_pdf_short"):
+        if profile.get(key) and not (ASSETS / profile[key]).exists():
+            problems.append(f"CV 파일이 없습니다: assets/{profile[key]}")
 
     # yaml 안에서 가리키는 이미지가 실제로 있는지
     def walk(node, path="cv"):
