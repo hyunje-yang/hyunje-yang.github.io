@@ -10,6 +10,7 @@ build.py -- content/*.yaml 을 읽어 site/ 안에 완성된 홈페이지를 만
 고칠 곳은 content/ 와 templates/ 뿐이다. site/ 는 매번 지워지고 다시 만들어진다.
 """
 import argparse
+import hashlib
 import re
 import shutil
 import sys
@@ -163,11 +164,17 @@ def build():
     shutil.copytree(ASSETS, OUT / "assets", dirs_exist_ok=True)
     shutil.copy(TEMPLATES / "style.css", OUT / "assets" / "style.css")
 
+    # style.css 가 바뀌면 주소도 바뀌게 한다.
+    # 안 그러면 브라우저가 예전 style.css 를 캐시에서 꺼내 써서
+    # 새 HTML 에 옛 디자인이 입혀진 화면이 나온다.
+    css_ver = hashlib.sha1((TEMPLATES / "style.css").read_bytes()).hexdigest()[:8]
+
     ctx = {
         "profile": profile,
         "cv": cv,
         "stories": stories,
         "built_on": date.today().isoformat(),
+        "css_ver": css_ver,
     }
 
     for template_name, out_name, title in PAGES:
