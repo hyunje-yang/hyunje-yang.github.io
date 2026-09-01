@@ -105,6 +105,30 @@ h4::after{content:""; display:block; width:120px; height:1px; background:#9a9a9a
 }
 .cv-button:hover{background:#fff; color:var(--ink-deep)}
 
+/* ---------- 홈 : 연구 관심 분야 ----------
+   네 칸의 윗선·번호·제목·설명이 모두 같은 높이에서 시작하도록 맞춘다. */
+.vision{
+  font-family:var(--serif); font-style:italic; font-size:21px; line-height:1.5;
+  color:var(--ink); text-wrap:pretty;
+  max-width:38em;                       /* 이탤릭이 화면 끝까지 가면 읽기 어렵다 */
+  margin:0 0 34px; padding-left:16px;
+  border-left:2px solid var(--orange);  /* 네 항목을 묶는 한 문장임을 표시 */
+}
+.interests{display:grid; grid-template-columns:repeat(4,1fr); gap:0 30px}
+.interests .ri{border-top:1px solid var(--line); padding-top:13px}
+.interests .ri-num{
+  font-family:var(--sans); font-size:11px; letter-spacing:.14em;
+  color:var(--muted); margin-bottom:6px;
+}
+.interests .ri-title{
+  font-weight:700; color:var(--ink-deep); margin-bottom:8px;
+  text-wrap:balance; line-height:1.35;
+  min-height:2.7em;            /* 두 줄 자리를 잡아 설명 첫 줄을 네 칸 모두 같은 높이에 맞춘다 */
+}
+.interests .ri-desc{
+  font-size:16px; line-height:1.55; color:#3a3a3a; text-wrap:pretty;
+}
+
 /* ---------- 타임라인 ----------
    선은 컨테이너에 하나만 그리고(끊기지 않게), 점을 그 선의 중심에 얹는다. */
 .timeline{position:relative; margin:0; padding:0; border:0}
@@ -288,6 +312,13 @@ footer .base span{display:block; line-height:1.7}
   .intro .photo img{height:auto}
   .intro > div:not(.who-card):not(.photo){flex:none; width:100%}
 
+  /* 연구 관심 분야: 4칸을 2칸으로 접는다 */
+  .vision{font-size:18px; max-width:none; margin-bottom:24px; padding-left:13px}
+  .interests{grid-template-columns:repeat(2,1fr); gap:22px 22px}
+  .interests .ri{padding-top:11px}
+  .interests .ri-title{min-height:0}   /* 2칸에서는 제목이 모두 한 줄이라 자리를 비워 둘 필요가 없다 */
+  .interests .ri-desc{font-size:15px}
+
   /* 타임라인: 세로선과 점을 없애고 날짜를 위로 올린다 */
   .timeline::before{display:none}
   .tl-org{padding-left:0; margin-bottom:30px}
@@ -359,6 +390,12 @@ footer .base span{display:block; line-height:1.7}
   footer .logo-bar .unit{flex:0 0 50%; min-height:0; justify-content:center}
   footer .logo-bar img{height:var(--logo-mh,25px); max-width:150px; margin:0 auto}
   footer .base{margin-top:16px; padding:12px 0 18px}
+}
+
+@media (max-width:560px){
+  /* 더 좁으면 한 줄에 하나씩 (2단 배치를 푼다) */
+  .interests{grid-template-columns:1fr; gap:18px}
+  .interests .ri-num{margin-bottom:4px}
 }
 
 @media (max-width:400px){

@@ -305,6 +305,16 @@ def build_docx(profile, cv):
             run(p, n)
         blank(doc)
 
+    # ---------- RESEARCH INTERESTS ----------
+    # 홈 화면과 달리 CV 에는 제목 네 개만 싣는다 (설명 문장은 홈 화면 전용).
+    if cv.get("research_interests"):
+        section(doc, "RESEARCH INTERESTS")
+        for it in cv["research_interests"]:
+            p = para(doc, size=10, num=NUM_DOT,
+                     left_indent=Inches(0.2), hanging=Inches(0.2))
+            run(p, it["title"])
+        blank(doc)
+
     # ---------- RESEARCH EXPERIENCE ----------
     section(doc, "RESEARCH EXPERIENCE")
     for org in cv["research_experience"]:

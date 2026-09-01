@@ -38,6 +38,26 @@ education:
     notes:
       - National Scholarship Award for 7 semesters, Ministry of Science and ICT
 
+# ----------------------------------------------------------------------------- RESEARCH INTERESTS
+# 홈 화면의 RESEARCH INTERESTS 와 CV 의 같은 이름 섹션을 함께 만듭니다.
+#   research_vision : 홈 화면에만 실리는 한 문장 (CV 에는 넣지 않습니다)
+#   title           : CV 에 실리는 것은 이 제목 4개뿐입니다
+#   desc            : 홈 화면 카드의 설명 한 줄
+research_vision: Toward transferable, probabilistic compound-flood forecasting from site-specific emulation to regional-to-global early warning
+
+research_interests:
+  - title: Transferable AI Modeling
+    desc: Geometry-aware neural operators that generalize flood prediction to unseen coastlines
+
+  - title: Compound Coastal Flooding
+    desc: Understanding how storm surge, rainfall, river discharge, and tide combine to flood the coast
+
+  - title: Forecast Uncertainty and Early Warning
+    desc: Uncertainty-aware flood forecasting for probabilistic early warning
+
+  - title: Hydrology of Ungauged Systems
+    desc: Machine-learning prediction of soil and catchment hydrology using terrain and remote sensing
+
 # ----------------------------------------------------------------------------- RESEARCH EXPERIENCE
 # 홈 화면의 연표와 CV의 RESEARCH EXPERIENCE 를 함께 만듭니다.
 research_experience:

@@ -16,6 +16,22 @@
   </div>
 </section>
 
+<section id="interests">
+  <h2 class="section-title">RESEARCH INTERESTS</h2><div class="rule"></div>
+  {%- if cv.research_vision %}
+  <p class="vision">{{ cv.research_vision }}</p>
+  {%- endif %}
+  <div class="interests">
+  {%- for it in cv.research_interests %}
+    <div class="ri">
+      <div class="ri-num">{{ "%02d"|format(loop.index) }}</div>
+      <div class="ri-title">{{ it.title }}</div>
+      <div class="ri-desc">{{ it.desc }}</div>
+    </div>
+  {%- endfor %}
+  </div>
+</section>
+
 <section id="research">
   <h2 class="section-title">RESEARCH EXPERIENCE</h2><div class="rule"></div>
 
