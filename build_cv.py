@@ -446,11 +446,11 @@ def build_docx(profile, cv):
     tail_right(p, head, dash(m["period"]), size=10, italic=True)
     for s in m["summary"]:
         bullet(doc, s)
-    p = para(doc, size=10)
-    run(p, "Discography: ")
+    # 음반 목록은 CV 에서만 한 줄로 줄여 쓴다 (홈페이지에는 표지와 함께 따로 있다).
     disc = "; ".join(
-        f'{d["kind"]} “{m["band"]} - {d["title"]}” ({d["year"]})' for d in m["discography"])
-    run(p, disc + ".")
+        f'{d["title"]} ({d.get("cv_kind", d["kind"].lower())}, {d["year"]})'
+        for d in m["discography"])
+    bullet(doc, f"Discography: {disc}.")
     for o in m.get("other_activities", []):
         head = f'{o["role"]}, {o["org"]}'
         p = para(doc, size=10, space_before=4, keep_next=True)

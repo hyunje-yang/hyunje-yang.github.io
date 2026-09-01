@@ -691,12 +691,12 @@ skills:
 # ----------------------------------------------------------------------------- MUSIC (Band Muguet)
 music:
   band: Muguet
-  role: Founder and Leader
+  role: Founder and Band Leader
   period: May 2014 - Present
   start: 2014-05
   summary:
-    - Founded and led a rock band; performed as a songwriter, vocalist, pianist, and guitarist.
-    - Performed in numerous band concerts; placed top 2 in the 2015 SNU Student Band Competition and received a grant for music recording.
+    - Songwriter, vocalist, pianist, and guitarist; performed at numerous concerts.
+    - Placed second in the 2015 SNU Student Band Competition and received a recording grant.
   members:
     - {role: Vocal,   name: Hyunje Yang}
     - {role: Guitars, name: "Youngmin Yoon, Hyunje Yang"}
@@ -710,6 +710,7 @@ music:
   discography:
     - kind: Original Album
       title: Forest Dawn
+      cv_kind: album
       artist: Muguet
       year: 2022
       credit: Play as Vocal, Guitar, and Songwriter
@@ -720,6 +721,7 @@ music:
 
     - kind: Digital Single
       title: Butterfly
+      cv_kind: digital single
       artist: Muguet
       year: 2015
       credit: Play as Vocal, Guitar, and Songwriter
@@ -729,10 +731,10 @@ music:
       url_label: Official Audio in YouTube
 
   other_activities:
-    - role: Singer, Guitarist, and Pianist
-      org: SNU Central Band Club Meari and College Band Club Megimsori
+    - role: Vocalist, Guitarist, and Pianist
+      org: SNU Central Band Clubs Meari and Megimsori
       period: Mar. 2013 - Jun. 2015
-      note: Performed several times during the university festival every semester.
+      note: Performed multiple times at SNU’s university festival each semester.
 
 # ----------------------------------------------------------------------------- VOLUNTEER
 volunteer:
