@@ -188,7 +188,7 @@ def build():
 
     n_pub = len(cv.get("publications", []))
     n_conf = len(cv["conferences"]["oral"]) + len(cv["conferences"]["poster"])
-    print(f"\n완료: 논문 {n_pub}편 / preprint {len(cv.get('preprints', []))}편 / 학회 {n_conf}건 / 저서 {len(cv.get('books', []))}권 "
+    print(f"\n완료: 논문 {n_pub}편 / 심사 중 {len(cv.get('under_review', []))}편 / 준비 중 {len(cv.get('in_preparation', []))}편 / 학회 {n_conf}건 / 저서 {len(cv.get('books', []))}권 "
           f"/ 특허 {len(cv['patents']['list'])}건 / 수상 {len(cv.get('awards', []))}건")
     return len(problems)
 

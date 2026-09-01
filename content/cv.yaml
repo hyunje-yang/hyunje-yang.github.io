@@ -180,15 +180,35 @@ research_experience:
           - Joined the 5th CALS Research Fellowship Program as an undergraduate researcher.
           - Measured in situ streambed materials and organized flash flood velocity data in urban areas.
 
-# ----------------------------------------------------------------------------- PREPRINTS
-# 아직 정식 출판 전인 원고. 저널에 실리면 이 항목을 publications 로 옮깁니다.
-preprints:
+# ----------------------------------------------------------------------------- UNDER REVIEW
+# 저널에 내고 심사 중인 원고. 실리면 이 항목을 publications 로 옮깁니다.
+under_review:
   - authors: Yang, H., Lee, J.W., Lee, W.
     title: "Where, When, and How Do Physics-Informed Deep Learning Models Improve Hurricane-Induced Compound Flooding Predictions?"
     venue: ESS Open Archive
     year: 2026
     date: Jun. 29, 2026
     doi: 10.22541/essoar.15005345/v1
+
+# ----------------------------------------------------------------------------- IN PREPARATION
+# 아직 투고 전인 원고. 제목·저자는 2026 AGU Fall Meeting 초록 원문에서 그대로 가져왔습니다.
+# (! 2023,2024 UT Austin research/260727 [presentation] AGU 2026 Fall Meeting/)
+in_preparation:
+  - authors: Yang, H., Li, Z., Lee, J.W., Kim, T., Tran, V.N., Lu, D., Dias, P.A., Painter, S.L., Le, P.V.V.
+    title: Geometry-Aware Neural Operators for Transferable Storm Surge Prediction
+
+  - authors: Li, Z., Yang, H., Dias, P.A., Faxon, A., McCarthy, M., Sulman, B., Painter, S.L., Tran, V.N., Lu, D., Le, P.V.V.
+    title: Divergent Controls on Coastal Wetland Resistance and Recovery to Tropical Cyclones
+
+  - authors: Le, P.V.V., Dias, P.A., Yang, H., Li, Z., Tran, V.N., Lu, D., Faxon, A., McCarthy, M., Sulman, B., Painter, S.L.
+    title: Learning Transferable Storm Surge Dynamics from Synthetic Hurricanes Using Diffusion Models
+
+  - authors: Chowdhury, M.E., Yang, H.
+    title: "Analysis of Flood-Driver Transition across 14 Historical Storms in the Houston–Galveston Region"
+
+  - authors: Yang, H.*, Kim, T.*, Lee, J.W., Ivanov, V.
+    title: "HT-PTF: Landscape-Informed Operator Learning for Spatially Contiguous Mapping of Soil Water Retention Curves"
+    note: "*Both authors contributed equally to this work"
 
 # ----------------------------------------------------------------------------- JOURNAL ARTICLES
 publications:

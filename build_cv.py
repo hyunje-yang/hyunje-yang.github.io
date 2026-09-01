@@ -151,7 +151,8 @@ def text_width_pt(text, size=10, bold=False, italic=False):
 
 
 SQUEEZE_LIMIT_PT = 0.3      # 글자당 이만큼까지만 좁힌다 (10pt 기준 약 3%)
-MIN_GAP_PT = 26             # 왼쪽 글과 오른쪽 날짜 사이에 반드시 두는 간격
+MIN_GAP_PT = 26             # 왼쪽 글과 오른쪽 날짜 사이에 두려는 간격
+TIGHT_GAP_PT = 12           # 자간을 좁혀서라도 한 줄에 넣을 때 허용하는 최소 간격
 
 
 def squeeze(p, per_char_pt):
@@ -168,25 +169,63 @@ def squeeze(p, per_char_pt):
         rPr.append(sp)
 
 
+def _line_width(text, size, bold, per_char_pt):
+    """자간을 per_char_pt 만큼 좁혔을 때 이 글자들의 폭(pt)."""
+    return text_width_pt(text, size, bold) - per_char_pt * len(text)
+
+
+def wrap_lines(text, avail, size=10, bold=False, per_char_pt=0.0):
+    """Word 가 이 글을 폭 avail 안에서 어떻게 줄바꿈하는지 흉내 낸다.
+    끊을 수 있는 자리는 띄어쓰기 뒤와 붙임표(-) 뒤다."""
+    stops = [i + 1 for i, c in enumerate(text) if c in " -"] + [len(text)]
+    lines, s = [], 0
+    while s < len(text):
+        best = None
+        for e in stops:
+            if e <= s:
+                continue
+            if _line_width(text[s:e].rstrip(), size, bold, per_char_pt) <= avail:
+                best = e
+            else:
+                break
+        if best is None:                     # 한 낱말이 통째로 넘칠 때
+            best = next(e for e in stops if e > s)
+        lines.append(text[s:best].rstrip())
+        s = best
+        while s < len(text) and text[s] == " ":
+            s += 1
+    return lines or [""]
+
+
 def tail_right(p, left_text, right_text, *, indent_in=0.0, size=10,
                bold=False, italic=None):
     """오른쪽 끝 항목(지역, 기간)을 붙인다.
 
-    - 살짝 넘치면 자간을 조금 좁혀 한 줄에 넣는다.
-    - 많이 넘치면 줄을 바꾸고, 그 문단은 양쪽정렬을 풀어
+    - 왼쪽 글이 여러 줄로 넘어가면 그 마지막 줄의 오른쪽 끝에 붙인다.
+    - 살짝 넘치면 자간을 조금 좁혀 같은 줄에 넣는다.
+    - 그래도 안 되면 줄을 바꾸고, 그 문단은 양쪽정렬을 풀어
       글자 사이가 벌어지지 않게 한다."""
     avail = 7.5 * 72 - indent_in * 72                     # 본문 폭(pt)
-    need = (text_width_pt(left_text, size, bold) +
-            text_width_pt(right_text, size, bold, True) + MIN_GAP_PT)
-    over = need - avail
+
+    def fits(per_char, gap):
+        last = wrap_lines(left_text, avail, size, bold, per_char)[-1]
+        need = (_line_width(last, size, bold, per_char)
+                + text_width_pt(right_text, size, bold, True)
+                - per_char * len(right_text) + gap)
+        return need <= avail
+
     per_char = 0.0
-    if over > 0:
-        n = max(1, len(left_text) + len(right_text))
-        per_char = over / n * 1.15        # 글자 폭 계산 오차를 감안해 조금 더 좁힌다
-        if per_char > SQUEEZE_LIMIT_PT:                   # 좁혀도 안 들어간다
+    if not fits(0.0, MIN_GAP_PT):
+        for step in range(1, int(SQUEEZE_LIMIT_PT * 20) + 1):
+            if fits(step / 20, TIGHT_GAP_PT):
+                per_char = step / 20
+                break
+        else:                                             # 좁혀도 안 들어간다
             p.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
             p.runs[-1].add_break()
-            per_char = 0.0
+    if len(wrap_lines(left_text, avail, size, bold, per_char)) > 1:
+        # 여러 줄로 넘어간 문단은 양쪽정렬을 풀어 낱말 사이가 벌어지지 않게 한다.
+        p.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
     right_tab(p)
     run(p, right_text, italic=italic)
     if per_char:
@@ -293,12 +332,19 @@ def build_docx(profile, cv):
 
     # ---------- PUBLICATIONS ----------
     section(doc, "PUBLICATIONS")
-    if cv.get("preprints"):
+    if cv.get("under_review"):
         p = para(doc, size=10, bold=True, space_before=2, keep_next=True)
-        run(p, "[Preprints]")
-        for x in cv["preprints"]:
+        run(p, "[Under Review]")
+        for x in cv["under_review"]:
             p = para(doc, size=10, num=NUM_DASH, align="left")
             write_ref(p, x, kind="preprint")
+
+    if cv.get("in_preparation"):
+        p = para(doc, size=10, bold=True, space_before=4, keep_next=True)
+        run(p, "[In Preparation]")
+        for x in cv["in_preparation"]:
+            p = para(doc, size=10, num=NUM_DASH, align="left")
+            write_ref(p, x, kind="in_preparation")
 
     p = para(doc, size=10, bold=True, space_before=4, keep_next=True)
     run(p, "[Journals]")
@@ -401,6 +447,11 @@ def write_authors(p, authors):
 def write_ref(p, x, kind):
     write_authors(p, x["authors"])
     run(p, f' “{x["title"]}” ')
+    if kind == "in_preparation":          # 투고 전 원고는 저널 이름이 아직 없다
+        run(p, "In preparation.", italic=True)
+        if x.get("note"):
+            run(p, f' ({x["note"]})')
+        return
     run(p, x["venue"], italic=True)
     if kind == "journal":
         tail = f', {x["year"]}'

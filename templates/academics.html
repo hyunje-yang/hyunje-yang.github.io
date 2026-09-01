@@ -10,10 +10,10 @@
 <section id="publications">
   <h2 class="section-title">PUBLICATIONS</h2><div class="rule"></div>
 
-  {%- if cv.preprints %}
-  <h4>Preprints</h4>
+  {%- if cv.under_review %}
+  <h4>Under Review</h4>
   <ol class="reflist">
-  {%- for p in cv.preprints %}
+  {%- for p in cv.under_review %}
     <li>
       {{ p.authors | bold_me }}
       <span class="ttl">&ldquo;{{ p.title }}&rdquo;</span>
@@ -22,6 +22,22 @@
     </li>
   {%- endfor %}
   </ol>
+  {%- endif %}
+
+  {%- if cv.in_preparation %}
+  <h4>In Preparation</h4>
+  <ol class="reflist">
+  {%- for p in cv.in_preparation %}
+    <li>
+      {{ p.authors | bold_me }}
+      <span class="ttl">&ldquo;{{ p.title }}&rdquo;</span>
+      <em>In preparation.</em>{% if p.note %} <span class="muted">({{ p.note }})</span>{% endif %}
+    </li>
+  {%- endfor %}
+  </ol>
+  {%- endif %}
+
+  {%- if cv.under_review or cv.in_preparation %}
   <h4>Journal Articles</h4>
   {%- endif %}
 
