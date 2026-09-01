@@ -440,18 +440,22 @@ def build_docx(profile, cv):
     # ---------- MUSIC ACTIVITIES ----------
     section(doc, "MUSIC ACTIVITIES")
     m = cv["music"]
-    two_col(doc, f'{m["role"]}, Rock Band “{m["band"]}”', dash(m["period"]),
-            size=10, bold=True)
+    head = f'{m["role"]}, Rock Band “{m["band"]}”'
+    p = para(doc, size=10, keep_next=True)
+    run(p, head)
+    tail_right(p, head, dash(m["period"]), size=10, italic=True)
     for s in m["summary"]:
         bullet(doc, s)
     p = para(doc, size=10)
-    run(p, "Discography: ", bold=True)
+    run(p, "Discography: ")
     disc = "; ".join(
         f'{d["kind"]} “{m["band"]} - {d["title"]}” ({d["year"]})' for d in m["discography"])
     run(p, disc + ".")
     for o in m.get("other_activities", []):
-        two_col(doc, f'{o["role"]}, {o["org"]}', dash(o["period"]), size=10, bold=True,
-                space_before=4)
+        head = f'{o["role"]}, {o["org"]}'
+        p = para(doc, size=10, space_before=4, keep_next=True)
+        run(p, head)
+        tail_right(p, head, dash(o["period"]), size=10, italic=True)
         if o.get("note"):
             bullet(doc, o["note"])
 
