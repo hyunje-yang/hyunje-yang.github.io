@@ -436,7 +436,10 @@ def build_docx(profile, cv, short=False):
             run(p, f' {b["publisher"]}, {b["year"]}. (ISBN: {b["isbn"]})')
 
     # ---------- CONFERENCE PRESENTATIONS ----------
-    section(doc, "CONFERENCE PRESENTATIONS")
+    # 짧은 판은 목록을 잘라 싣기 때문에 제목에 SELECTED 를 붙인다.
+    # 그래야 읽는 사람이 이것을 전체 목록으로 오해하지 않는다.
+    section(doc, "SELECTED CONFERENCE PRESENTATIONS" if short
+                 else "CONFERENCE PRESENTATIONS")
     # 짧은 판은 가장 최근 해부터 4년치만 남긴다. 기준 해는 시계가 아니라
     # CV 안의 가장 최근 발표 연도라서, 오늘 날짜가 바뀌어도 목록이 흔들리지 않는다.
     cut = 0
