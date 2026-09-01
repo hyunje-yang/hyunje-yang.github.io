@@ -43,7 +43,7 @@ education:
 #   research_vision : 홈 화면에만 실리는 한 문장 (CV 에는 넣지 않습니다)
 #   title           : CV 에 실리는 것은 이 제목 4개뿐입니다
 #   desc            : 홈 화면 카드의 설명 한 줄
-research_vision: Toward transferable, probabilistic compound-flood forecasting from site-specific emulation to regional-to-global early warning
+research_vision: Toward transferable, probabilistic compound flood forecasting from site-specific emulation to regional-to-global early warning
 
 research_interests:
   - title: Transferable AI Modeling
