@@ -168,6 +168,8 @@ def build():
     # 안 그러면 브라우저가 예전 style.css 를 캐시에서 꺼내 써서
     # 새 HTML 에 옛 디자인이 입혀진 화면이 나온다.
     css_ver = hashlib.sha1((TEMPLATES / "style.css").read_bytes()).hexdigest()[:8]
+    # 탭 아이콘(favicon)도 같은 이유로 주소에 버전을 붙인다.
+    fav_ver = hashlib.sha1((ASSETS / "img" / "favicon-32.png").read_bytes()).hexdigest()[:8]
 
     ctx = {
         "profile": profile,
@@ -175,6 +177,7 @@ def build():
         "stories": stories,
         "built_on": date.today().isoformat(),
         "css_ver": css_ver,
+        "fav_ver": fav_ver,
     }
 
     for template_name, out_name, title in PAGES:
