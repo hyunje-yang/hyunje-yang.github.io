@@ -46,6 +46,7 @@ TIMES_BOLD = "/mnt/c/Windows/Fonts/timesbd.ttf"
 TIMES_ITALIC = "/mnt/c/Windows/Fonts/timesi.ttf"
 NUM_DASH = 3                      # 원본 numbering: 대시(–) 목록
 NUM_DOT = 6                       # 원본 numbering: 점(●) 목록
+SHORT_CONF_YEARS = 4              # 짧은 판에 남기는 학회 발표 기간(가장 최근 해부터 4년)
 
 
 # --------------------------------------------------------------------------- 뼈대
@@ -424,21 +425,32 @@ def build_docx(profile, cv, short=False):
         p = para(doc, size=10, num=NUM_DASH, align="left")
         write_ref(p, x, kind="journal")
 
-    p = para(doc, size=10, bold=True, space_before=4, keep_next=True)
-    run(p, "[Books]")
-    for b in cv["books"]:
-        p = para(doc, size=10, num=NUM_DASH, align="left")
-        write_authors(p, b["authors"])
-        run(p, " ")
-        run(p, b["title"] + ".", italic=True)
-        run(p, f' {b["publisher"]}, {b["year"]}. (ISBN: {b["isbn"]})')
+    if not short:
+        p = para(doc, size=10, bold=True, space_before=4, keep_next=True)
+        run(p, "[Books]")
+        for b in cv["books"]:
+            p = para(doc, size=10, num=NUM_DASH, align="left")
+            write_authors(p, b["authors"])
+            run(p, " ")
+            run(p, b["title"] + ".", italic=True)
+            run(p, f' {b["publisher"]}, {b["year"]}. (ISBN: {b["isbn"]})')
 
     # ---------- CONFERENCE PRESENTATIONS ----------
     section(doc, "CONFERENCE PRESENTATIONS")
+    # 짧은 판은 가장 최근 해부터 4년치만 남긴다. 기준 해는 시계가 아니라
+    # CV 안의 가장 최근 발표 연도라서, 오늘 날짜가 바뀌어도 목록이 흔들리지 않는다.
+    cut = 0
+    if short:
+        years = [c.get("year", 0)
+                 for k in ("oral", "poster") for c in cv["conferences"][k]]
+        cut = max(years) - (SHORT_CONF_YEARS - 1)
     for key, label in (("oral", "[Oral Presentations]"), ("poster", "[Poster Presentations]")):
+        items = [c for c in cv["conferences"][key] if c.get("year", 0) >= cut]
+        if not items:
+            continue
         p = para(doc, size=10, bold=True, space_before=4, keep_next=True)
         run(p, label)
-        for c in cv["conferences"][key]:
+        for c in items:
             p = para(doc, size=10, num=NUM_DASH, align="left")
             write_authors(p, c["authors"])
             run(p, f' “{c["title"]}” {c["venue"]}, {c["location"]}, {c["date"]}.')
