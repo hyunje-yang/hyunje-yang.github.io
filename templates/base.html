@@ -68,5 +68,10 @@
   </div>
 </footer>
 
+{% if profile.analytics and profile.analytics.umami_website_id %}<!-- 방문자 통계 (Umami). 쿠키를 쓰지 않고, 개인을 식별하지 않는다. -->
+<script defer src="{{ profile.analytics.umami_script }}"
+        data-website-id="{{ profile.analytics.umami_website_id }}"
+        data-domains="{{ profile.analytics.umami_domains }}"></script>{% endif %}
+
 </body>
 </html>

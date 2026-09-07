@@ -82,6 +82,18 @@ footer_logos:
 copyright: "© 2021 Hyunje Yang"
 credit: "Designed by Hyunje in Seoul"
 
+# =============================================================================
+#  방문자 통계 (Umami Cloud, 무료 Hobby 플랜)
+#  cloud.umami.is 에서 사이트를 등록하면 Website ID(긴 영숫자 코드)가 나옵니다.
+#  그 값을 umami_website_id 에 붙여 넣고 build.py 를 다시 돌리면 켜집니다.
+#  비워 두면 추적 코드가 페이지에 아예 들어가지 않습니다.
+# =============================================================================
+analytics:
+  umami_website_id: "977b73be-b3f2-4752-b2cf-d5044ad462ae"
+  umami_script: https://cloud.umami.is/script.js
+  # 이 도메인에서 열렸을 때만 기록한다. 로컬 미리보기(localhost)는 세지 않는다.
+  umami_domains: hyunjeyang.com
+
 # 메뉴 (순서를 바꾸면 사이트 메뉴 순서가 바뀝니다)
 nav:
   - {title: Home,       file: index.html}
