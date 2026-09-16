@@ -11,6 +11,7 @@ build.py -- content/*.yaml 을 읽어 site/ 안에 완성된 홈페이지를 만
 """
 import argparse
 import hashlib
+import json
 import re
 import shutil
 import sys
@@ -28,11 +29,24 @@ ASSETS = ROOT / "assets"
 OUT = ROOT / "site"
 
 # 어떤 템플릿이 어떤 파일로 나가는지. profile.yaml 의 nav 와 짝을 맞춘다.
+#
+# description 은 구글 검색 결과에 제목 아래 뜨는 두 줄이고, 링크를 채팅에 붙였을 때도
+# 같이 뜬다. 비워 두면 구글이 본문에서 아무 문장이나 골라 쓰므로 직접 적어 둔다.
+# 길이는 155자 안쪽이 좋다. 그보다 길면 뒤가 "..." 로 잘린다.
 PAGES = [
-    ("index.html",      "index.html",      "Home"),
-    ("academics.html",  "academics.html",  "Academics"),
-    ("activities.html", "activities.html", "Activities"),
-    ("contact.html",    "contact.html",    "Contact Me"),
+    ("index.html", "index.html", "Home", 1.0,
+     "Hyunje Yang is a PhD candidate at The University of Texas at Austin. "
+     "He builds machine learning models for storm surge, compound flooding, "
+     "and flood inundation mapping."),
+    ("academics.html", "academics.html", "Academics", 0.9,
+     "Publications, conference presentations, research experience, awards, and "
+     "patents of Hyunje Yang, PhD candidate in civil engineering at UT Austin."),
+    ("activities.html", "activities.html", "Activities", 0.6,
+     "Music, volunteer work, and student leadership of Hyunje Yang, "
+     "including the band Muguet."),
+    ("contact.html", "contact.html", "Contact Me", 0.6,
+     "How to reach Hyunje Yang at The University of Texas at Austin: email, "
+     "ORCID, Google Scholar, and GitHub."),
 ]
 
 ME = "Yang, H."          # 저자 목록에서 굵게 표시할 이름
@@ -84,6 +98,122 @@ def load_stories():
             key = f.stem.replace("-", "_")
             stories[key] = md_to_html(f.read_text(encoding="utf-8"))
     return stories
+
+
+# --------------------------------------------------------- 검색엔진에 알려 주는 것들
+def base_url(profile) -> str:
+    """https://hyunjeyang.com 처럼 끝에 슬래시가 없는 형태로 돌려준다."""
+    return (profile.get("site_url") or "").rstrip("/")
+
+
+def page_url(root: str, out_name: str) -> str:
+    """index.html 은 주소에 파일 이름을 붙이지 않는다. 주소가 둘로 갈리기 때문이다."""
+    if not root:
+        return ""
+    return f"{root}/" if out_name == "index.html" else f"{root}/{out_name}"
+
+
+def make_jsonld(profile, cv, root: str) -> Markup:
+    """
+    구글이 읽는 '이 사람이 누구인가' 카드(schema.org Person)를 만든다.
+
+    핵심은 sameAs 다. ORCID, Google Scholar, GitHub 주소를 한자리에 적어 두면
+    구글이 흩어져 있는 기록을 같은 사람으로 묶는다. 이름으로 검색했을 때
+    홈페이지가 위로 올라오는 데 가장 크게 작용하는 부분이다.
+    """
+    links = profile.get("links", {})
+    same_as = [links[k]["url"] for k in ("orcid", "scholar", "github")
+               if links.get(k, {}).get("url")]
+
+    # 학력에서 모교를 뽑는다. 같은 학교가 학사·석사로 두 번 나오면 한 번만 넣는다.
+    alumni, seen = [], set()
+    for e in cv.get("education", []):
+        school = e.get("school")
+        if school and school != profile["affiliation"]["university"] and school not in seen:
+            seen.add(school)
+            alumni.append({"@type": "CollegeOrUniversity", "name": school})
+
+    person = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": profile["name"],
+        "givenName": "Hyunje",
+        "familyName": "Yang",
+        "jobTitle": profile["header_lines"][1],
+        "description": profile.get("research_vision") or cv.get("research_vision", ""),
+        "affiliation": {
+            "@type": "CollegeOrUniversity",
+            "name": profile["affiliation"]["university"],
+            "url": "https://www.utexas.edu/",
+        },
+        "worksFor": {
+            "@type": "ResearchOrganization",
+            "name": profile["affiliation"]["lab"],
+            "url": profile["affiliation"].get("lab_url", ""),
+            "parentOrganization": {
+                "@type": "CollegeOrUniversity",
+                "name": profile["affiliation"]["university"],
+            },
+        },
+        "knowsAbout": [i["title"] for i in cv.get("research_interests", []) if i.get("title")],
+    }
+    if root:
+        person["url"] = f"{root}/"
+        person["image"] = f"{root}/assets/img/og-card.jpg"
+    if profile.get("email"):
+        person["email"] = f"mailto:{profile['email']}"
+    if alumni:
+        person["alumniOf"] = alumni
+    if same_as:
+        person["sameAs"] = same_as
+    if links.get("orcid", {}).get("url"):
+        person["identifier"] = {
+            "@type": "PropertyValue",
+            "propertyID": "ORCID",
+            "value": links["orcid"]["url"],
+        }
+
+    # HTML 안에 넣으므로 </script> 같은 조각이 태그로 읽히지 않게 막는다.
+    text = json.dumps(person, ensure_ascii=False, indent=2)
+    text = text.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+    return Markup(text)
+
+
+def write_robots_and_sitemap(root: str, today: str):
+    """
+    robots.txt  -- 크롤러에게 '다 봐도 된다' 고 알리고 지도의 위치를 가리킨다.
+    sitemap.xml -- 페이지 목록. 링크를 타고 다니지 않아도 전부 찾을 수 있게 한다.
+
+    site_url 이 비어 있으면 둘 다 만들지 않는다. 주소가 없으면 쓸모가 없기 때문이다.
+    """
+    if not root:
+        return []
+
+    robots = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "\n"
+        f"Sitemap: {root}/sitemap.xml\n"
+    )
+    (OUT / "robots.txt").write_text(robots, encoding="utf-8")
+
+    rows = []
+    for _, out_name, _, priority, _ in PAGES:
+        rows.append(
+            "  <url>\n"
+            f"    <loc>{page_url(root, out_name)}</loc>\n"
+            f"    <lastmod>{today}</lastmod>\n"
+            f"    <priority>{priority}</priority>\n"
+            "  </url>"
+        )
+    sitemap = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "\n".join(rows)
+        + "\n</urlset>\n"
+    )
+    (OUT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
+    return ["robots.txt", "sitemap.xml"]
 
 
 def check(profile, cv):
@@ -156,6 +286,14 @@ def build():
             print(f"  CV 생성 실패: {e}")
             print("  (홈페이지는 계속 만듭니다. 기존 CV 파일이 그대로 쓰입니다.)")
 
+    # 링크 미리보기 카드. Times New Roman 이 있는 로컬에서만 새로 만들어지고,
+    # GitHub Actions(리눅스)에서는 저장소에 올려 둔 jpg 를 그대로 쓴다.
+    try:
+        import build_og
+        build_og.main()
+    except Exception as e:
+        print(f"  미리보기 카드 생성 실패: {e}  (기존 파일을 그대로 씁니다)")
+
     if OUT.exists():
         shutil.rmtree(OUT)
     OUT.mkdir(parents=True)
@@ -180,12 +318,34 @@ def build():
         "fav_ver": fav_ver,
     }
 
-    for template_name, out_name, title in PAGES:
+    root = base_url(profile)
+    if not root:
+        print("  건너뜀  canonical / sitemap (profile.yaml 의 site_url 이 비어 있습니다)")
+    og_card = ASSETS / "img" / "og-card.jpg"
+    og_image = f"{root}/assets/img/og-card.jpg" if root and og_card.exists() else ""
+    jsonld = make_jsonld(profile, cv, root) if root else ""
+    uni = profile["affiliation"]["university"]
+
+    for template_name, out_name, title, _priority, desc in PAGES:
+        home = out_name == "index.html"
         html = env.get_template(template_name).render(
-            page_title=title, this_page=out_name, **ctx
+            page_title=title,
+            this_page=out_name,
+            page_description=desc,
+            canonical_url=page_url(root, out_name),
+            og_type="profile" if home else "website",
+            # 홈은 제목 자리에 "누구인지" 가 통째로 보이는 편이 낫다
+            og_title=(f"{profile['name']} | {profile['header_lines'][1]}, {uni}"
+                      if home else f"{title} | {profile['name']}"),
+            og_image=og_image,
+            jsonld=jsonld if home else "",   # 사람 정보는 홈에 한 번만 넣는다
+            **ctx,
         )
         (OUT / out_name).write_text(html, encoding="utf-8")
         print(f"  만듦  site/{out_name}")
+
+    for name in write_robots_and_sitemap(root, ctx["built_on"]):
+        print(f"  만듦  site/{name}")
 
     # GitHub Pages 가 Jekyll 로 다시 처리하지 않게 하는 표시
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
@@ -195,6 +355,16 @@ def build():
     if cname.exists():
         shutil.copy(cname, OUT / "CNAME")
         print(f"  만듦  site/CNAME  ({cname.read_text().strip()})")
+
+    # 검색엔진 소유 확인 파일 (Google Search Console, Bing 등).
+    # content/verify/ 에 받은 파일을 그대로 넣어 두면 사이트 맨 위로 복사된다.
+    # 예: content/verify/google1a2b3c.html -> https://hyunjeyang.com/google1a2b3c.html
+    verify = CONTENT / "verify"
+    if verify.is_dir():
+        for f in sorted(verify.iterdir()):
+            if f.is_file():
+                shutil.copy(f, OUT / f.name)
+                print(f"  만듦  site/{f.name}  (소유 확인 파일)")
 
     n_pub = len(cv.get("publications", []))
     n_conf = len(cv["conferences"]["oral"]) + len(cv["conferences"]["poster"])

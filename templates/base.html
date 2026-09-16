@@ -4,10 +4,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ page_title }} | {{ profile.name }}</title>
-<meta name="description" content="{{ profile.name }} - {{ profile.header_lines[1] }}, {{ profile.affiliation.university }}.">
+<meta name="description" content="{{ page_description }}">
+{% if canonical_url %}
+<!-- 이 페이지의 정식 주소. 검색엔진이 같은 내용을 여러 주소로 세지 않게 한다. -->
+<link rel="canonical" href="{{ canonical_url }}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+<!-- 링크를 붙였을 때 뜨는 미리보기 (카카오톡, 슬랙, 링크드인, 트위터, iMessage) -->
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:site_name" content="{{ profile.name }}">
+<meta property="og:title" content="{{ og_title }}">
+<meta property="og:description" content="{{ page_description }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:locale" content="en_US">
+{% if og_image %}
+<meta property="og:image" content="{{ og_image }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ profile.name }}, {{ profile.header_lines[1] }} at {{ profile.affiliation.university }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ og_image }}">
+{% endif %}
+<meta name="twitter:title" content="{{ og_title }}">
+<meta name="twitter:description" content="{{ page_description }}">
+{% endif %}
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png?v={{ fav_ver }}">
 <link rel="apple-touch-icon" href="assets/img/favicon-180.png?v={{ fav_ver }}">
 <link rel="stylesheet" href="assets/style.css?v={{ css_ver }}">
+{% if jsonld %}
+<!-- 구글에게 "이 사람이 누구인지" 를 기계가 읽는 형식으로 알려 준다.
+     ORCID 와 Google Scholar 를 같이 적어 두면 동일 인물로 묶어 준다. -->
+<script type="application/ld+json">{{ jsonld }}</script>
+{% endif %}
 </head>
 <body>
 
