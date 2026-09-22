@@ -373,6 +373,7 @@ conferences:
       location: Texas, USA
       date: Sep. 21-22, 2026
       year: 2026
+      note: Lightning Talk and Poster
 
     - authors: Yang, H., Lee, J.W., Santos Cruz, A.U., Subgranon, A., Klepac, S.P., Jiao, J.
       title: Can Hurricane, Surge, and Damage Data Assist in Reconstructing Structural Features?
@@ -644,6 +645,9 @@ patents:
 
 # ----------------------------------------------------------------------------- AWARDS
 awards:
+  - name: Best Poster Award, TACC Symposium for Texas Researchers 26
+    date: Sep. 2026
+    year: 2026
   - name: "Kolodzey Travel Grant, CAEE, UT Austin — American Geophysical Union Fall Meeting 2025"
     date: Dec. 2025
     year: 2025
