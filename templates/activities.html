@@ -3,6 +3,7 @@
 
 <div class="subnav cols-3">
   <a href="#story">My Story</a>
+  <a href="#teaching">Teaching &amp; Mentoring</a>
   <a href="#muguet">Muguet</a>
   <a href="#patents">Patents</a>
   <a href="#volunteer">Volunteer Works</a>
@@ -12,6 +13,34 @@
 <section id="story">
   <h2 class="section-title">MY STORY</h2><div class="rule"></div>
   <div class="card">{{ stories.my_story }}</div>
+</section>
+
+<section id="teaching">
+  <h2 class="section-title">TEACHING AND MENTORING</h2><div class="rule"></div>
+  <table class="plain grouped">
+  {%- for g in cv.teaching_mentoring %}
+    <tr>
+      <td class="when">{{ g.group }}</td>
+      <td>
+        {%- for e in g.entries %}
+        <div class="entry-head{% if not loop.first %} spaced{% endif %}">
+          <span class="name">{{ e.title }}</span>
+          <span class="meta">{{ e.org }} &middot; <span class="nowrap">{{ e.period.replace(' - ', ' – ') }}</span></span>
+        </div>
+        <ul class="subitems">
+          {%- for b in e.bullets %}<li>{{ b }}</li>{% endfor %}
+        </ul>
+        {%- if e.video %}
+        <figure class="clip">
+          <video src="assets/{{ e.video }}" poster="assets/{{ e.poster }}" autoplay muted loop playsinline preload="metadata" aria-label="{{ e.caption }}"></video>
+          <figcaption>{{ e.caption }}</figcaption>
+        </figure>
+        {%- endif %}
+        {%- endfor %}
+      </td>
+    </tr>
+  {%- endfor %}
+  </table>
 </section>
 
 <section id="muguet">

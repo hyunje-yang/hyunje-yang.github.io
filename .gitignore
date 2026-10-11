@@ -27,3 +27,6 @@ Thumbs.db
 .DS_Store
 ~$*
 비교_*.png
+
+# 2쪽 CV (홈페이지에서 링크하지 않는 지원서용. 공개 저장소에 올리지 않는다)
+assets/pdf/Hyunje-Yang-CV-2Page.pdf

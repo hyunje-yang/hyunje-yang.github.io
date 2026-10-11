@@ -17,7 +17,6 @@ education:
     start: 2023-08
     notes:
       - UT Austin Engineering Fellowship, Cockrell School of Engineering and UT Austin Graduate School
-      - "Teaching Assistant, Probability and Statistics for Civil Engineers (Spring 2025, 2026)"
 
   - school: Seoul National University
     abbr: SNU
@@ -27,7 +26,6 @@ education:
     start: 2016-03
     notes:
       - "Thesis: Formula for Calculating Mean Velocity in Mountain Streams Using the Salt Dilution Method"
-      - "Teaching Assistant, Forest Geological Information (Spring 2016)"
 
   - school: Seoul National University
     abbr: SNU
@@ -681,6 +679,52 @@ peer_review:
   - Journal of Hydrology
   - Geomatics, Natural Hazards and Risk
 
+# ----------------------------------------------------------------------------- TEACHING AND MENTORING
+# CV: PEER-REVIEW SERVICE 다음, REGISTERED PATENTS 위 (전체 판에만).
+# 홈페이지: Activities 페이지의 MY STORY 바로 다음.
+#   video / poster : 홈페이지에서만 쓴다 (자동 반복, 소리 없음)
+#   short_org      : 2쪽 판에서 한 줄로 줄일 때 쓰는 기관 이름 (없으면 org)
+teaching_mentoring:
+  - group: Teaching
+    entries:
+      - title: Teaching Assistant, CE 311S Probability and Statistics for Civil Engineers
+        org: The University of Texas at Austin
+        short_org: UT Austin
+        period: Spring 2025, Spring 2026
+        bullets:
+          - Led weekly laboratory sessions and office hours, explaining statistical concepts relevant to civil engineering.
+      - title: Teaching Assistant, Forest Geological Information
+        org: Seoul National University
+        period: Spring 2016
+        bullets:
+          - Led weekly GIS laboratory sessions, guiding students in applying course concepts to real-world forest spatial data using QGIS.
+
+  - group: Curriculum Development
+    entries:
+      - title: AI-Enabled Laboratory Platform for Undergraduate Fluid Mechanics (CE 319F)
+        org: UT Austin Academic Development Funds Project
+        short_org: UT Austin
+        period: Aug. 2026 - Present
+        bullets:
+          - Developing a web-based learning platform integrating computer vision–based flow visualization and AI-assisted interpretation to connect laboratory observations with fluid mechanics principles.
+        video: video/ce319f-tracer-tracking.mp4
+        poster: video/ce319f-tracer-tracking.jpg
+        caption: The platform tracks floating tracers in a smartphone video of a laboratory flume, then shows each tracer's path and current speed.
+
+  - group: Mentoring and Outreach
+    entries:
+      - title: Organizer and Mentor, Graduate–Undergraduate Mentoring Program
+        org: UT Austin Korean Student Association
+        short_org: UT Austin
+        period: Sep. 2023 - Aug. 2024
+        bullets:
+          - Organized and coordinated a mentoring program connecting undergraduates with graduate mentors across multiple disciplines, providing guidance on graduate education and research careers.
+      - title: Founder and President, WITHYOU Education Volunteer Club
+        org: South Korea
+        period: Mar. 2009 - Mar. 2013
+        bullets:
+          - Founded a community-based volunteer organization providing free mathematics tutoring to students from low-income families, establishing a program sustained by successive generations of student volunteers.
+
 # ----------------------------------------------------------------------------- TECHNICAL SKILLS
 skills:
   - group: Programming
@@ -777,8 +821,6 @@ extracurricular:
         period: Jan. 2015 - Jul. 2015
       - text: "Volunteer, Habitat for Humanity: Served 100+ hours and built 5+ houses"
         period: Feb. 2013 - Feb. 2015
-      - text: "President and Founder, 'WITHYOU' Education Volunteer Club: Tutored math to low-income students"
-        period: Mar. 2009 - Mar. 2013
 
   - group: Military Service
     entries:

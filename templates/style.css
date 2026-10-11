@@ -419,3 +419,12 @@ footer .base span{display:block; line-height:1.7}
 }
 
 @media print{ .nav,.subnav,.cv-button{display:none} body{background:#fff} }
+
+/* Teaching and Mentoring: 기관 · 기간 줄. 좁은 화면에서는 기관 뒤에서 줄을 바꾸고, 기간은 끊지 않는다 */
+.entry-head .meta{display:block; margin-top:2px; font-style:italic; font-size:15px; color:#4a4a4a}
+.entry-head .meta .nowrap{white-space:nowrap}
+/* Teaching and Mentoring: 자동 반복 영상 (소리 없음) */
+.clip{margin:12px 0 4px; max-width:340px}
+.clip video{display:block; width:100%; height:auto; border:1px solid #b5b5b5; background:#000}
+.clip figcaption{margin-top:6px; font-size:14px; line-height:1.4; color:var(--text)}
+@media (max-width:860px){ .clip{max-width:100%} }

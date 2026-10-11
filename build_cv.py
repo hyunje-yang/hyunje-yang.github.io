@@ -38,6 +38,9 @@ OUT_DOCX = OUT_DIR / "Hyunje-Yang-CV.docx"
 OUT_PDF = OUT_DIR / "Hyunje-Yang-CV.pdf"
 OUT_DOCX_SHORT = OUT_DIR / "Hyunje-Yang-CV-Short.docx"
 OUT_PDF_SHORT = OUT_DIR / "Hyunje-Yang-CV-Short.pdf"
+# 2쪽 판. 홈페이지에서 링크하지 않는다 (지원서에 직접 첨부하는 용도).
+OUT_DOCX_2P = OUT_DIR / "Hyunje-Yang-CV-2Page.docx"
+OUT_PDF_2P = OUT_DIR / "Hyunje-Yang-CV-2Page.pdf"
 
 RIGHT_EDGE = Inches(7.5)          # 용지 8.5in - 좌우 여백 0.5in
 LINK_COLOR = "199CFF"             # 기존 CV 가 쓰던 파란색 (RGB 25,156,255)
@@ -47,6 +50,9 @@ TIMES_ITALIC = "/mnt/c/Windows/Fonts/timesi.ttf"
 NUM_DASH = 3                      # 원본 numbering: 대시(–) 목록
 NUM_DOT = 6                       # 원본 numbering: 점(●) 목록
 SHORT_CONF_YEARS = 4              # 짧은 판에 남기는 학회 발표 기간(가장 최근 해부터 4년)
+TWO_PAGE_YEARS = 3                # 2쪽 판에 반드시 넣는 논문·학회 발표 기간(가장 최근 해부터 3년)
+TWO_PAGE_LIMIT = 2                # 2쪽 판의 쪽수 상한
+TWO_PAGE_CONF_YEARS = 2           # 2쪽 판의 학회 발표 기간(가장 최근 해부터 2년). TEACHING AND MENTORING 자리를 내려고 줄였다
 
 
 # --------------------------------------------------------------------------- 뼈대
@@ -314,14 +320,27 @@ def references(doc, cv):
 
 
 # --------------------------------------------------------------------------- 본문
-def build_docx(profile, cv, short=False):
+def recent_cut(years, n_years):
+    """가장 최근 해부터 n_years 년치의 시작 연도. 기준은 시계가 아니라 CV 안의 최신 연도다."""
+    return max(years) - (n_years - 1)
+
+
+def build_docx(profile, cv, short=False, two_page=False, n_journals=None):
     """short=True 면 짧은 판을 만든다.
+
+    two_page=True 면 2쪽 판을 만든다 (짧은 판을 바탕으로 한다).
+      - 논문은 SELECTED PUBLICATIONS 로, 최신 n_journals 편만 싣는다.
+        (n_journals 는 main() 이 2쪽에 들어가는 만큼 늘려 가며 정한다)
+      - 학회 발표는 최근 TWO_PAGE_YEARS 년치만.
+      - TECHNICAL SKILLS 와 REFERENCES 는 뺀다.
 
     싣는 것: EDUCATION / RESEARCH INTERESTS / RESEARCH EXPERIENCE /
              PUBLICATIONS / CONFERENCE PRESENTATIONS / PEER-REVIEW SERVICE /
              TECHNICAL SKILLS
     빼는 것: 연구 경력의 대시(–) 세부 항목과 과제 기간, 그리고 그 아래 모든 절
              (특허, 수상, 음악, 대외활동)."""
+    if two_page:
+        short = True
     doc = Document(str(TEMPLATE))
     clear_body(doc)
 
@@ -337,7 +356,8 @@ def build_docx(profile, cv, short=False):
         link(p, profile["site_url"])
     if short:
         p = para(doc, size=9, italic=True, align="center", space_before=3)
-        run(p, "Short version. Full CV available at ")
+        run(p, ("Two-page version." if two_page else "Short version.")
+            + " Full CV available at ")
         link(p, profile.get("cv_url", profile.get("site_url", "")),
              profile.get("cv_url_label", "hyunjeyang.com"), size=9)
 
@@ -404,7 +424,7 @@ def build_docx(profile, cv, short=False):
         blank(doc)
 
     # ---------- PUBLICATIONS ----------
-    section(doc, "PUBLICATIONS")
+    section(doc, "SELECTED PUBLICATIONS" if two_page else "PUBLICATIONS")
     if cv.get("under_review"):
         p = para(doc, size=10, bold=True, space_before=2, keep_next=True)
         run(p, "[Under Review]")
@@ -421,7 +441,10 @@ def build_docx(profile, cv, short=False):
 
     p = para(doc, size=10, bold=True, space_before=4, keep_next=True)
     run(p, "[Journals]")
-    for x in cv["publications"]:
+    journals = cv["publications"]
+    if two_page and n_journals is not None:     # 최신순으로 정렬돼 있으므로 앞에서 자른다
+        journals = journals[:n_journals]
+    for x in journals:
         p = para(doc, size=10, num=NUM_DASH, align="left")
         write_ref(p, x, kind="journal")
 
@@ -446,9 +469,11 @@ def build_docx(profile, cv, short=False):
     if short:
         years = [c.get("year", 0)
                  for k in ("oral", "poster") for c in cv["conferences"][k]]
-        cut = max(years) - (SHORT_CONF_YEARS - 1)
+        cut = recent_cut(years, TWO_PAGE_CONF_YEARS if two_page else SHORT_CONF_YEARS)
     for key, label in (("oral", "[Oral Presentations]"), ("poster", "[Poster Presentations]")):
         items = [c for c in cv["conferences"][key] if c.get("year", 0) >= cut]
+        if two_page:                      # 2쪽 판은 1저자 발표만 싣는다
+            items = [c for c in items if c["authors"].startswith("Yang, H.")]
         if not items:
             continue
         p = para(doc, size=10, bold=True, space_before=4, keep_next=True)
@@ -466,6 +491,30 @@ def build_docx(profile, cv, short=False):
         p = para(doc, size=10, num=NUM_DASH)
         run(p, j)
 
+    # ---------- TEACHING AND MENTORING ----------
+    # 2쪽 판: 항목마다 "직함, 기관" 한 줄 + 오른쪽 기간. 갈래 이름과 설명은 뺀다.
+    if two_page:
+        section(doc, "TEACHING AND MENTORING")
+        for g in cv["teaching_mentoring"]:
+            for e in g["entries"]:
+                text = f'{e["title"]}, {e.get("short_org", e["org"])}'
+                p = para(doc, size=10, num=NUM_DASH)
+                run(p, text)
+                tail_right(p, text, dash(e["period"]), indent_in=0.25, italic=True)
+    # 전체 판: 갈래 이름(굵게) → 직함 + 기간(오른쪽) → 기관(기울임) → 대시 목록. 영상은 홈페이지에만 싣는다.
+    elif not short:
+        section(doc, "TEACHING AND MENTORING")
+        for gi, g in enumerate(cv["teaching_mentoring"]):
+            p = para(doc, size=10, bold=True, keep_next=True, space_before=0 if gi == 0 else 6)
+            run(p, g["group"])
+            for ei, e in enumerate(g["entries"]):
+                two_col(doc, e["title"], dash(e["period"]), size=10,
+                        space_before=0 if ei == 0 else 4)
+                p = para(doc, size=10, italic=True, keep_next=True)
+                run(p, e["org"])
+                for b in e["bullets"]:
+                    bullet(doc, b)
+
     # ---------- REGISTERED PATENTS ----------
     if not short:
         section(doc, "REGISTERED PATENTS")
@@ -473,6 +522,9 @@ def build_docx(profile, cv, short=False):
             p = para(doc, size=10, num=NUM_DASH)
             run(p, pt["title"])
             tail_right(p, pt["title"], pt["date"], indent_in=0.25, italic=True)
+
+    if two_page:                          # 2쪽 판은 기술·추천인을 싣지 않는다
+        return doc
 
     # ---------- TECHNICAL SKILLS ----------
     section(doc, "TECHNICAL SKILLS")
@@ -607,7 +659,44 @@ def main():
         print(f"  만듦  assets/pdf/{docx_path.name}")
         if "--no-pdf" not in sys.argv and to_pdf(docx_path, pdf_path):
             print(f"  만듦  assets/pdf/{pdf_path.name}  (Word 변환)")
+    if "--no-pdf" not in sys.argv:
+        build_two_page(profile, cv)
     return 0
+
+
+def pdf_pages(pdf_path: Path) -> int:
+    from pypdf import PdfReader
+    return len(PdfReader(str(pdf_path)).pages)
+
+
+def build_two_page(profile, cv):
+    """2쪽 판. 최근 3년 논문으로 시작해, 2쪽을 넘지 않는 한 옛 논문을 한 편씩 더한다.
+    쪽수는 글자 수로 어림하지 않고 Word 로 실제 PDF 를 만들어 센다."""
+    pubs = cv["publications"]
+    cut = recent_cut([x["year"] for x in pubs], TWO_PAGE_YEARS)
+    n = sum(1 for x in pubs if x["year"] >= cut)     # 반드시 넣는 최근 논문 수
+    best, overflow = None, False
+    while n <= len(pubs):
+        doc = build_docx(profile, cv, two_page=True, n_journals=n)
+        doc.save(str(OUT_DOCX_2P))
+        if not to_pdf(OUT_DOCX_2P, OUT_PDF_2P):
+            return
+        pages = pdf_pages(OUT_PDF_2P)
+        print(f"  2쪽 판 시도: 논문 {n}편 -> {pages}쪽")
+        if pages > TWO_PAGE_LIMIT:
+            overflow = True
+            break
+        best = n
+        n += 1
+    if best is None:
+        print(f"  주의: 최근 {TWO_PAGE_YEARS}년 논문만 넣어도 {TWO_PAGE_LIMIT}쪽을 넘습니다.")
+        return
+    if overflow:                          # 마지막 시도가 넘쳤으면 들어갔던 판으로 되돌린다
+        doc = build_docx(profile, cv, two_page=True, n_journals=best)
+        doc.save(str(OUT_DOCX_2P))
+        to_pdf(OUT_DOCX_2P, OUT_PDF_2P)
+    print(f"  만듦  assets/pdf/{OUT_PDF_2P.name}  (논문 {best}/{len(pubs)}편, "
+          f"{pdf_pages(OUT_PDF_2P)}쪽)")
 
 
 if __name__ == "__main__":
