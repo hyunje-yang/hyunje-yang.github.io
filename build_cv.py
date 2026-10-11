@@ -492,8 +492,8 @@ def build_docx(profile, cv, short=False, two_page=False, n_journals=None):
         run(p, j)
 
     # ---------- TEACHING AND MENTORING ----------
-    # 2쪽 판: 항목마다 "직함, 기관" 한 줄 + 오른쪽 기간. 갈래 이름과 설명은 뺀다.
-    if two_page:
+    # 짧은 판·2쪽 판: 항목마다 "직함, 기관" 한 줄 + 오른쪽 기간. 갈래 이름과 설명은 뺀다.
+    if short:
         section(doc, "TEACHING AND MENTORING")
         for g in cv["teaching_mentoring"]:
             for e in g["entries"]:
@@ -502,7 +502,7 @@ def build_docx(profile, cv, short=False, two_page=False, n_journals=None):
                 run(p, text)
                 tail_right(p, text, dash(e["period"]), indent_in=0.25, italic=True)
     # 전체 판: 갈래 이름(굵게) → 직함 + 기간(오른쪽) → 기관(기울임) → 대시 목록. 영상은 홈페이지에만 싣는다.
-    elif not short:
+    else:
         section(doc, "TEACHING AND MENTORING")
         for gi, g in enumerate(cv["teaching_mentoring"]):
             p = para(doc, size=10, bold=True, keep_next=True, space_before=0 if gi == 0 else 6)
