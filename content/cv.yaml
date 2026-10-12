@@ -685,6 +685,18 @@ peer_review:
 #   video / poster : 홈페이지에서만 쓴다 (자동 반복, 소리 없음)
 #   short_org      : 2쪽 판에서 한 줄로 줄일 때 쓰는 기관 이름 (없으면 org)
 teaching_mentoring:
+  - group: Curriculum Development
+    entries:
+      - title: AI-Enabled Laboratory Platform for Undergraduate Fluid Mechanics (CE 319F)
+        org: UT Austin Academic Development Funds Project
+        short_org: UT Austin
+        period: Aug. 2026 - Present
+        bullets:
+          - Developing a web-based learning platform integrating computer vision–based flow visualization and AI-assisted interpretation to connect laboratory observations with fluid mechanics principles.
+        video: video/ce319f-tracer-tracking.mp4
+        poster: video/ce319f-tracer-tracking.jpg
+        caption: The platform tracks floating tracers in a smartphone video of a laboratory flume, then shows each tracer's path and current speed.
+
   - group: Teaching
     entries:
       - title: Teaching Assistant, CE 311S Probability and Statistics for Civil Engineers
@@ -698,18 +710,6 @@ teaching_mentoring:
         period: Spring 2016
         bullets:
           - Led weekly GIS laboratory sessions, guiding students in applying course concepts to real-world forest spatial data using QGIS.
-
-  - group: Curriculum Development
-    entries:
-      - title: AI-Enabled Laboratory Platform for Undergraduate Fluid Mechanics (CE 319F)
-        org: UT Austin Academic Development Funds Project
-        short_org: UT Austin
-        period: Aug. 2026 - Present
-        bullets:
-          - Developing a web-based learning platform integrating computer vision–based flow visualization and AI-assisted interpretation to connect laboratory observations with fluid mechanics principles.
-        video: video/ce319f-tracer-tracking.mp4
-        poster: video/ce319f-tracer-tracking.jpg
-        caption: The platform tracks floating tracers in a smartphone video of a laboratory flume, then shows each tracer's path and current speed.
 
   - group: Mentoring and Outreach
     entries:
@@ -838,7 +838,7 @@ references:
     org: University of Texas at Austin
     email: junwhanlee@austin.utexas.edu
   - name: Phong V. V. Le, Ph.D.
-    title: R&D Staff Member
+    title: Staff Scientist
     dept: Environmental Sciences Division
     org: Oak Ridge National Laboratory
     email: lepv@ornl.gov
