@@ -736,6 +736,13 @@ skills:
   - group: Experimental and Field
     detail: Installation of hydrological instruments and data collection via datalogger, water level gauge, sap flow sensor, and automatic water sampler; salt-dilution stream discharge measurement; forest soil sampling and hydraulic property analysis
 
+# ----------------------------------------------------------------------------- CERTIFICATIONS
+# 근거: 현제님이 보여 준 FAA 자격증 실물 (II REMOTE PILOT / X DATE OF ISSUE 15 JUL 2024).
+# 자격증 번호·주소·생년월일은 공개 저장소이므로 싣지 않는다.
+certifications:
+  - name: Remote Pilot Certificate (Part 107), Federal Aviation Administration (FAA)
+    date: Jul. 2024
+
 # ----------------------------------------------------------------------------- MUSIC (Band Muguet)
 music:
   band: Muguet

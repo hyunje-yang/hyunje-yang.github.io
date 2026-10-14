@@ -117,4 +117,15 @@
   </table>
 </section>
 
+{%- if cv.certifications %}
+<section id="certifications">
+  <h2 class="section-title">CERTIFICATIONS</h2><div class="rule"></div>
+  <table class="plain">
+  {%- for c in cv.certifications %}
+    <tr><td class="when">{{ c.date }}</td><td>{{ c.name }}</td></tr>
+  {%- endfor %}
+  </table>
+</section>
+{%- endif %}
+
 {% endblock %}

@@ -533,6 +533,14 @@ def build_docx(profile, cv, short=False, two_page=False, n_journals=None):
         run(p, s["group"] + ": ", bold=True)
         run(p, s["detail"])
 
+    # ---------- CERTIFICATIONS ----------
+    if cv.get("certifications"):
+        section(doc, "CERTIFICATIONS")
+        for c in cv["certifications"]:
+            p = para(doc, size=10, num=NUM_DASH)
+            run(p, c["name"])
+            tail_right(p, c["name"], c["date"], indent_in=0.25, italic=True)
+
     if short:                             # 짧은 판은 추천인까지만
         references(doc, cv)
         return doc
